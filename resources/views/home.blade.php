@@ -124,6 +124,66 @@
             More
         </button>
     </div>
+    <footer class="bg-[#1565c0] text-white px-6 py-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-start md:justify-between gap-6 md:gap-0">
+            <div class="flex-shrink-0">
+                <img alt="Yellow pentagon shaped logo with red and green emblem and black text Universitas Jember"
+                    class="w-[100px] h-[100px]" height="100"
+                    src="https://storage.googleapis.com/a1aa/image/83760adf-8643-42ff-492e-c523fe85d107.jpg"
+                    width="100" />
+            </div>
+            <div class="flex-1 md:pl-6">
+                <h2 class="font-bold text-white text-[15px] leading-tight mb-2 uppercase">
+                    UNIVERSITAS JEMBER
+                </h2>
+                <p class="text-[13px] font-semibold leading-tight">
+                    Kampus Jember: Jl. Kalimantan Tegalboto No.37, Krajan Timur, Sumbersari, Kec. Sumbersari, Kabupaten
+                    Jember.
+                    <br />
+                    Kampus Bondowoso: Jl. Diponegoro, Poncogati, Curah Dami, Kabupaten Bondowoso.
+                    <br />
+                    Kampus Lumajang: Jl. Brigjen. Katamso, Tompokersan, Lumajang.
+                    <br />
+                    Kampus Pasuruan: Jl. KH. Mansyur No.207, Tembokrejo, Kec. Pasuruan.
+                </p>
+            </div>
+            <div class="flex flex-col md:items-end text-[13px] font-semibold space-y-3">
+                <div>
+                    <span class="font-bold text-white">
+                        More About us :
+                    </span>
+                </div>
+                <div class="flex flex-col space-y-1">
+                    <a class="flex items-center space-x-2 hover:underline" href="https://www.unej.ac.id"
+                        target="_blank">
+                        <i class="fas fa-globe">
+                        </i>
+                        <span>
+                            unej.ac.id
+                        </span>
+                    </a>
+                    <a class="flex items-center space-x-2 hover:underline" href="https://www.instagram.com/univ_jember"
+                        target="_blank">
+                        <i class="fab fa-instagram">
+                        </i>
+                        <span>
+                            @univ_jember
+                        </span>
+                    </a>
+                </div>
+                <div>
+                    <a class="flex items-center space-x-2 hover:underline font-bold"
+                        href="https://www.facebook.com/universitasjember" target="_blank">
+                        <i class="fab fa-facebook-f">
+                        </i>
+                        <span>
+                            Universitas Jember
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>
