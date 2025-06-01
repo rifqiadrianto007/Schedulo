@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <title>
-        Schedulo Login
+        Schedulo
     </title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
@@ -21,7 +21,7 @@
         <img alt="Schedulo logo clock icon white on blue background" class="mr-2" height="40"
             src="https://storage.googleapis.com/a1aa/image/b0117f03-b472-499c-a2db-a3952f5e027e.jpg" width="40" />
         <h1 class="text-white font-extrabold text-xl underline decoration-white decoration-4">
-            Schedul
+            Schedulo
             <span class="inline-block align-middle">
                 <svg class="inline-block" fill="none" height="24" stroke="white" stroke-linecap="round"
                     stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24"
