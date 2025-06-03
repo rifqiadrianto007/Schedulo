@@ -7,6 +7,7 @@
         Schedulo
     </title>
     <script src="https://cdn.tailwindcss.com"></script>
+    @vite('resources/css/app.css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet" />
     <style>
@@ -216,65 +217,8 @@
             </div>
         </section>
     </main>
-    <!-- Footer -->
-    <footer class="bg-[#2a6ad1] mt-10 text-white">
-        <div
-            class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-6 sm:space-y-0">
-            <div class="flex items-center space-x-4">
-                <img alt="Logo of Universitas Jember with yellow background and red flower emblem"
-                    class="w-20 h-20 object-contain" height="80"
-                    src="https://storage.googleapis.com/a1aa/image/7c9518bb-1c9c-43bd-0e55-0b69eff0aa19.jpg"
-                    width="80" />
-                <div class="text-[9px] sm:text-xs leading-tight max-w-xs sm:max-w-sm">
-                    <p class="font-semibold">
-                        UNIVERSITAS JEMBER
-                    </p>
-                    <p>
-                        Kampus Jember: Jl. Kalimantan Tegalboto No.37, Krajan Timur, Sumbersari, Kec. Sumbersari,
-                        Kabupaten Jember.
-                    </p>
-                    <p>
-                        Kampus Bondowoso: Jl. Diponegoro, Poncogati, Curah Dami, Kabupaten Bondowoso.
-                    </p>
-                    <p>
-                        Kampus Lumajang: Jl. Brigjen. Katamso, Tompokersan, Lumajang.
-                    </p>
-                    <p>
-                        Kampus Pasuruan: Jl. KH. Mansyur No.207, Tembokrejo, Kec. Pasuruan.
-                    </p>
-                </div>
-            </div>
-            <div class="text-[9px] sm:text-xs max-w-xs sm:max-w-sm">
-                <p class="font-semibold mb-2">
-                    More About us :
-                </p>
-                <div class="flex flex-col space-y-2">
-                    <a class="flex items-center space-x-2 hover:underline" href="https://unej.ac.id" target="_blank">
-                        <i class="fas fa-globe">
-                        </i>
-                        <span>
-                            unej.ac.id
-                        </span>
-                    </a>
-                    <a class="flex items-center space-x-2 hover:underline" href="https://twitter.com/univ_jember"
-                        target="_blank">
-                        <i class="fab fa-twitter">
-                        </i>
-                        <span>
-                            @univ_jember
-                        </span>
-                    </a>
-                    <a class="flex items-center space-x-2 hover:underline" href="#">
-                        <i class="fab fa-facebook-f">
-                        </i>
-                        <span class="font-semibold">
-                            Universitas Jember
-                        </span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    {{-- footer --}}
+    <x-footer />
 </body>
 
 </html>
