@@ -36,10 +36,10 @@
 
             <!-- Navigation -->
             <nav class="hidden md:flex space-x-1">
-                <a href="#" class="px-4 py-2 bg-white text-gray-800 rounded-full font-medium">Home</a>
-                <a href="#" class="px-4 py-2 text-white hover:bg-blue-600 rounded-full font-medium">Event</a>
-                <a href="#" class="px-4 py-2 text-white hover:bg-blue-600 rounded-full font-medium">Venue</a>
-                <a href="#" class="px-4 py-2 text-white hover:bg-blue-600 rounded-full font-medium">Jadwal</a>
+                <a href="{{ route('home') }}" class="px-4 py-2 bg-white text-gray-800 rounded-full font-medium">Home</a>
+                <a href="{{ route('event') }}" class="px-4 py-2 text-white hover:bg-blue-600 rounded-full font-medium">Event</a>
+                <a href="{{ route('venue') }}" class="px-4 py-2 text-white hover:bg-blue-600 rounded-full font-medium">Venue</a>
+                <a href="{{ route('home') }}" class="px-4 py-2 text-white hover:bg-blue-600 rounded-full font-medium">Jadwal</a>
             </nav>
 
             <!-- Login Button -->

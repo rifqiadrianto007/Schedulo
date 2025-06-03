@@ -14,14 +14,10 @@ Route::get('regis', function () {
     return view('regis');
 })->name('regis');
 
-Route::get('/venue', function () {
+Route::get('venue', function () {
     return view('venue');
-});
+})->name('venue');
 
-Route::get('detailVenue', function () {
-    return view('detailVenue');
-});
-
-Route::get('detailEvent', function () {
-    return view('detailEvent');
-});
+Route::get('event', function () {
+    return view('event');
+})->name('event');
