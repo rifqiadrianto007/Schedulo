@@ -55,45 +55,46 @@
     <section class="bg-gray-100 py-8">
         <div class="max-w-6xl mx-auto px-4">
             <div class="relative">
-                <!-- Carousel Container -->
-                <div class="overflow-hidden rounded-lg">
-                    <div id="carousel" class="flex transition-transform duration-500 ease-in-out">
-                        <!-- Slide 1 -->
-                        <div class="w-full flex-shrink-0 px-2">
-                            <div class="flex gap-4">
-                                <div class="flex-1">
-                                    <img src="{{ asset('img/kegiatan1.jpg') }}"
-                                        alt="Program Sosialisasi" class="w-full h-auto rounded-lg shadow-lg">
-                                </div>
-                                <div class="flex-1">
-                                    <img src="{{ asset('img/kegiatan1.jpg') }}"
-                                        alt="Program Sosialisasi Center" class="w-full h-auto rounded-lg shadow-lg">
-                                </div>
-                                <div class="flex-1">
-                                    <img src="{{ asset('img/kegiatan1.jpg') }}"
-                                        alt="Program Sosialisasi" class="w-full h-auto rounded-lg shadow-lg">
-                                </div>
-                            </div>
-                        </div>
+                <!-- Carousel Container with 3-slide preview -->
+                <div class="flex items-center justify-center space-x-4">
+                    <!-- Previous slide (with opacity) -->
+                    <div class="flex-shrink-0 w-1/4 opacity-40 transform scale-90">
+                        <img id="prevSlideImg"
+                            src="{{ asset('img/kegiatan1.jpg') }}"
+                            alt="Previous Slide" class="w-full h-auto rounded-lg shadow-lg">
+                    </div>
+
+                    <!-- Current slide (main) -->
+                    <div class="flex-shrink-0 w-1/2">
+                        <img id="currentSlideImg"
+                            src="{{ asset('img/kegiatan1.jpg') }}"
+                            alt="Current Slide" class="w-full h-auto rounded-lg shadow-lg">
+                    </div>
+
+                    <!-- Next slide (with opacity) -->
+                    <div class="flex-shrink-0 w-1/4 opacity-40 transform scale-90">
+                        <img id="nextSlideImg"
+                            src="{{ asset('img/kegiatan1.jpg') }}"
+                            alt="Next Slide" class="w-full h-auto rounded-lg shadow-lg">
                     </div>
                 </div>
 
                 <!-- Navigation Arrows -->
                 <button id="prevBtn"
-                    class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 hover:bg-opacity-75 rounded-full p-2 shadow-lg">
-                    <i class="fas fa-chevron-left text-gray-700"></i>
+                    class="absolute left-8 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-90 rounded-full p-3 shadow-lg z-10">
+                    <i class="fas fa-chevron-left text-gray-700 text-lg"></i>
                 </button>
                 <button id="nextBtn"
-                    class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 hover:bg-opacity-75 rounded-full p-2 shadow-lg">
-                    <i class="fas fa-chevron-right text-gray-700"></i>
+                    class="absolute right-8 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-90 rounded-full p-3 shadow-lg z-10">
+                    <i class="fas fa-chevron-right text-gray-700 text-lg"></i>
                 </button>
 
                 <!-- Dots Indicator -->
-                <div class="flex justify-center mt-4 space-x-2">
-                    <button class="dot w-3 h-3 rounded-full bg-gray-400 active"></button>
-                    <button class="dot w-3 h-3 rounded-full bg-gray-300"></button>
-                    <button class="dot w-3 h-3 rounded-full bg-gray-300"></button>
-                    <button class="dot w-3 h-3 rounded-full bg-gray-300"></button>
+                <div class="flex justify-center mt-6 space-x-2">
+                    <button class="dot w-3 h-3 rounded-full bg-gray-400 active" data-slide="0"></button>
+                    <button class="dot w-3 h-3 rounded-full bg-gray-300" data-slide="1"></button>
+                    <button class="dot w-3 h-3 rounded-full bg-gray-300" data-slide="2"></button>
+                    <button class="dot w-3 h-3 rounded-full bg-gray-300" data-slide="3"></button>
                 </div>
             </div>
         </div>
@@ -108,8 +109,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
                 <!-- Event Card 1 -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden border">
-                    <img src="{{ asset('img/kegiatan1.jpg') }}"
-                        alt="Event" class="w-full h-40 object-cover">
+                    <img src="{{ asset('img/kegiatan1.jpg') }}" alt="Event" class="w-full h-40 object-cover">
                     <div class="p-4">
                         <h3 class="font-semibold text-gray-800 mb-2">Pembinaan Mahasiswa Wirausaha(P2MW)</h3>
                         <div class="text-sm text-blue-600 bg-blue-100 px-2 py-1 rounded-full inline-block mb-3">
@@ -124,8 +124,7 @@
 
                 <!-- Event Card 2 -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden border">
-                    <img src="{{ asset('img/kegiatan1.jpg') }}"
-                        alt="Event" class="w-full h-40 object-cover">
+                    <img src="{{ asset('img/kegiatan1.jpg') }}" alt="Event" class="w-full h-40 object-cover">
                     <div class="p-4">
                         <h3 class="font-semibold text-gray-800 mb-2">Pembinaan Mahasiswa Wirausaha(P2MW)</h3>
                         <div class="text-sm text-blue-600 bg-blue-100 px-2 py-1 rounded-full inline-block mb-3">
@@ -140,8 +139,7 @@
 
                 <!-- Event Card 3 -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden border">
-                    <img src="{{ asset('img/kegiatan1.jpg') }}"
-                        alt="Event" class="w-full h-40 object-cover">
+                    <img src="{{ asset('img/kegiatan1.jpg') }}" alt="Event" class="w-full h-40 object-cover">
                     <div class="p-4">
                         <h3 class="font-semibold text-gray-800 mb-2">Pembinaan Mahasiswa Wirausaha(P2MW)</h3>
                         <div class="text-sm text-blue-600 bg-blue-100 px-2 py-1 rounded-full inline-block mb-3">
@@ -156,8 +154,7 @@
 
                 <!-- Event Card 4 -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden border">
-                    <img src="{{ asset('img/kegiatan1.jpg') }}"
-                        alt="Event" class="w-full h-40 object-cover">
+                    <img src="{{ asset('img/kegiatan1.jpg') }}" alt="Event" class="w-full h-40 object-cover">
                     <div class="p-4">
                         <h3 class="font-semibold text-gray-800 mb-2">Pembinaan Mahasiswa Wirausaha(P2MW)</h3>
                         <div class="text-sm text-blue-600 bg-blue-100 px-2 py-1 rounded-full inline-block mb-3">
@@ -172,8 +169,7 @@
 
                 <!-- Event Card 5 -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden border">
-                    <img src="{{ asset('img/kegiatan1.jpg') }}"
-                        alt="Event" class="w-full h-40 object-cover">
+                    <img src="{{ asset('img/kegiatan1.jpg') }}" alt="Event" class="w-full h-40 object-cover">
                     <div class="p-4">
                         <h3 class="font-semibold text-gray-800 mb-2">Pembinaan Mahasiswa Wirausaha(P2MW)</h3>
                         <div class="text-sm text-blue-600 bg-blue-100 px-2 py-1 rounded-full inline-block mb-3">
@@ -188,8 +184,7 @@
 
                 <!-- Event Card 6 -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden border">
-                    <img src="{{ asset('img/kegiatan1.jpg') }}"
-                        alt="Event" class="w-full h-40 object-cover">
+                    <img src="{{ asset('img/kegiatan1.jpg') }}" alt="Event" class="w-full h-40 object-cover">
                     <div class="p-4">
                         <h3 class="font-semibold text-gray-800 mb-2">Pembinaan Mahasiswa Wirausaha(P2MW)</h3>
                         <div class="text-sm text-blue-600 bg-blue-100 px-2 py-1 rounded-full inline-block mb-3">
@@ -220,13 +215,33 @@
         // Carousel functionality
         let currentSlide = 0;
         const totalSlides = 4;
-        const carousel = document.getElementById('carousel');
+
+        // Array of slide images
+        const slides = [
+            "{{ asset('img/kegiatan1.jpg') }}",
+            "{{ asset('img/logo-unej.png') }}",
+            "{{ asset('img/kegiatan1.jpg') }}",
+            "{{ asset('img/logo-unej.png') }}"
+        ];
+
         const dots = document.querySelectorAll('.dot');
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
+        const currentSlideImg = document.getElementById('currentSlideImg');
+        const prevSlideImg = document.getElementById('prevSlideImg');
+        const nextSlideImg = document.getElementById('nextSlideImg');
+
+        function getSlideIndex(offset) {
+            return (currentSlide + offset + totalSlides) % totalSlides;
+        }
 
         function updateCarousel() {
-            carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+            // Update main slide image
+            currentSlideImg.src = slides[currentSlide];
+
+            // Update preview images
+            prevSlideImg.src = slides[getSlideIndex(-1)];
+            nextSlideImg.src = slides[getSlideIndex(1)];
 
             // Update dots
             dots.forEach((dot, index) => {
