@@ -44,9 +44,10 @@
 
             <!-- Login Button -->
             <div class="flex items-center">
-                <button class="bg-yellow-400 text-black px-4 py-2 rounded-full font-bold text-sm hover:bg-yellow-500">
+                <a href="{{ route('login') }}"
+                    class="bg-yellow-400 text-black px-4 py-2 rounded-full font-bold text-sm hover:bg-yellow-500 inline-block text-center">
                     MASUK
-                </button>
+                </a>
             </div>
         </div>
     </header>
@@ -59,23 +60,20 @@
                 <div class="flex items-center justify-center space-x-4">
                     <!-- Previous slide (with opacity) -->
                     <div class="flex-shrink-0 w-1/4 opacity-40 transform scale-90">
-                        <img id="prevSlideImg"
-                            src="{{ asset('img/kegiatan1.jpg') }}"
-                            alt="Previous Slide" class="w-full h-auto rounded-lg shadow-lg">
+                        <img id="prevSlideImg" src="{{ asset('img/kegiatan1.jpg') }}" alt="Previous Slide"
+                            class="w-full h-auto rounded-lg shadow-lg">
                     </div>
 
                     <!-- Current slide (main) -->
                     <div class="flex-shrink-0 w-1/2">
-                        <img id="currentSlideImg"
-                            src="{{ asset('img/kegiatan1.jpg') }}"
-                            alt="Current Slide" class="w-full h-auto rounded-lg shadow-lg">
+                        <img id="currentSlideImg" src="{{ asset('img/kegiatan1.jpg') }}" alt="Current Slide"
+                            class="w-full h-auto rounded-lg shadow-lg">
                     </div>
 
                     <!-- Next slide (with opacity) -->
                     <div class="flex-shrink-0 w-1/4 opacity-40 transform scale-90">
-                        <img id="nextSlideImg"
-                            src="{{ asset('img/kegiatan1.jpg') }}"
-                            alt="Next Slide" class="w-full h-auto rounded-lg shadow-lg">
+                        <img id="nextSlideImg" src="{{ asset('img/kegiatan1.jpg') }}" alt="Next Slide"
+                            class="w-full h-auto rounded-lg shadow-lg">
                     </div>
                 </div>
 

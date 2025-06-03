@@ -58,15 +58,14 @@
             </div>
             <p class="text-center text-xs text-gray-700">
                 Belum punya akun?
-                <a class="text-[#5a6dfd] font-semibold" href="#">
-                    Daftar!
+                <a class="text-[#5a6dfd] font-semibold" href="{{ route('login') }}">
+                    Login!
                 </a>
             </p>
-            <button
-                class="w-full bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-medium rounded-md py-3 text-base transition-colors"
-                type="submit">
+            <a href="{{ route('login') }}"
+                class="w-full bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-medium rounded-md py-3 text-base transition-colors inline-block text-center">
                 Masuk
-            </button>
+            </a>
         </form>
     </main>
 </body>
