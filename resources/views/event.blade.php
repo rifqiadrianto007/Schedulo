@@ -1,13 +1,31 @@
-{{-- resources/views/home.blade.php --}}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Schedulo</title>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>
+        Schedulo
+    </title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    @vite('resources/css/app.css')
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&amp;display=swap" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-blue': '#1565c0',
+                        'schedul-blue': '#4A90E2'
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 
 <body class="bg-gray-50">
@@ -229,32 +247,7 @@
                 </div>
 
                 <!-- Footer -->
-                <div class="bg-blue-600 text-white p-6">
-                    <div class="flex items-start justify-between">
-                        <div class="flex items-center space-x-4">
-                            <div class="w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center">
-                                <i class="fas fa-star text-red-600"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-bold mb-1">UNIVERSITAS JEMBER</h3>
-                                <div class="text-xs space-y-1">
-                                    <p>Kampus Jember: Jl. Kalimantan Tegalboto No.37 Krajan Timur, Sumbersari, Kec. Sumbersari, Kabupaten Jember.</p>
-                                    <p>Kampus Bondowoso: Jl. Diponegoro 156 Diponegoro, Tegalsari, Damai, Bondowoso, Kabupaten Bondowoso.</p>
-                                    <p>Kampus Lumajang: Jl. Brigjen Katamso, Tempokersari, Lumajang.</p>
-                                    <p>Kampus Pasuruan: Jl. KH. Mansyur No.207, Tembokrejo, Kec. Pasuruan.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-right text-sm">
-                            <h4 class="font-semibold mb-2">More About us :</h4>
-                            <div class="space-y-1">
-                                <p><i class="fas fa-globe mr-2"></i> unej.ac.id</p>
-                                <p><i class="fab fa-facebook mr-2"></i> Universitas Jember</p>
-                                <p><i class="fab fa-instagram mr-2"></i> @unej_jember</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <x-footer />
             `;
 
             // Show modal
