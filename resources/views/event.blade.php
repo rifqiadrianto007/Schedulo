@@ -58,8 +58,8 @@
             @for ($i = 1; $i <= 12; $i++)
                 <div class="bg-white rounded-lg shadow-md overflow-hidden event-card">
                     <div class="relative">
-                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDMyMCAxODAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMjAiIGhlaWdodD0iMTgwIiBmaWxsPSIjMzQ0ODVGIi8+CjxyZWN0IHg9IjIwIiB5PSIyMCIgd2lkdGg9IjI4MCIgaGVpZ2h0PSIxNDAiIGZpbGw9IiM1RDZBN0QiLz4KPGcgZmlsbD0iI0ZGRkZGRiI+CjxyZWN0IHg9IjQwIiB5PSI0MCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjEwMCIgcng9IjQiLz4KPHJlY3QgeD0iMTQwIiB5PSI0MCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjEwMCIgcng9IjQiLz4KPHJlY3QgeD0iMjQwIiB5PSI0MCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjEwMCIgcng9IjQiLz4KPC9nPgo8IS0tIERlY29yYXRpdmUgZG90cyAtLT4KPGNpcmNsZSBjeD0iNzAiIGN5PSIxMyIgcj0iMyIgZmlsbD0iI0ZGRkZGRiIvPgo8Y2lyY2xlIGN4PSI4NSIgY3k9IjEzIiByPSIzIiBmaWxsPSIjRkZGRkZGIi8+CjxjaXJjbGUgY3g9IjEwMCIgY3k9IjEzIiByPSIzIiBmaWxsPSIjRkZGRkZGIi8+CjxjaXJjbGUgY3g9IjIyMCIgY3k9IjEzIiByPSIzIiBmaWxsPSIjRkZGRkZGIi8+CjxjaXJjbGUgY3g9IjIzNSIgY3k9IjEzIiByPSIzIiBmaWxsPSIjRkZGRkZGIi8+CjxjaXJjbGUgY3g9IjI1MCIgY3k9IjEzIiByPSIzIiBmaWxsPSIjRkZGRkZGIi8+CjxjaXJjbGUgY3g9IjcwIiBjeT0iMTY3IiByPSIzIiBmaWxsPSIjRkZGRkZGIi8+CjxjaXJjbGUgY3g9Ijg1IiBjeT0iMTY3IiByPSIzIiBmaWxsPSIjRkZGRkZGIi8+CjxjaXJjbGUgY3g9IjEwMCIgY3k9IjE2NyIgcj0iMyIgZmlsbD0iI0ZGRkZGRiIvPgo8Y2lyY2xlIGN4PSIyMjAiIGN5PSIxNjciIHI9IjMiIGZpbGw9IiNGRkZGRkYiLz4KPGNpcmNsZSBjeD0iMjM1IiBjeT0iMTY3IiByPSIzIiBmaWxsPSIjRkZGRkZGIi8+CjxjaXJjbGUgY3g9IjI1MCIgY3k9IjE2NyIgcj0iMyIgZmlsbD0iI0ZGRkZGRiIvPgo8L3N2Zz4K"
-                            alt="Event Image" class="w-full h-48 object-cover">
+                        <img src="{{ asset('img/kegiatan1.jpg') }}" alt=""
+                            class="w-full h-auto rounded-lg shadow-lg">
                     </div>
                     <div class="p-4">
                         <h3 class="text-lg font-semibold text-gray-800 mb-2">
@@ -114,12 +114,12 @@
             modalContent.innerHTML = `
                 <!-- Header -->
                 <div class="bg-primary-blue text-white p-4 flex justify-between items-center">
-                    <div class="flex items-center space-x-8">
-                        <h1 class="text-white text-2xl font-bold">Schedulo</h1>
+                    <div class="flex items-center">
+                        <img src="{{ asset('img/logo.png') }}" alt="Schedulo Logo" class="h-8 w-auto">
                         <div class="ml-2 w-6 h-6 bg-white rounded-full flex items-center justify-center">
                             <i class="fas fa-check text-primary-blue text-sm"></i>
                         </div>
-                    </div>
+                </div>
                     <div class="flex items-center space-x-4">
                         <span>User - 2007</span>
                         <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center">
@@ -135,27 +135,8 @@
                 <div class="p-6">
                     <!-- Event Banner -->
                     <div class="mb-6 relative">
-                        <div class="bg-gradient-to-r from-teal-600 to-blue-600 rounded-lg p-8 text-white relative overflow-hidden">
-                            <div class="absolute top-4 left-4 flex space-x-2">
-                                <div class="w-8 h-8 bg-white rounded-full"></div>
-                                <div class="w-8 h-8 bg-yellow-400 rounded-full"></div>
-                                <div class="w-8 h-8 bg-blue-400 rounded-full"></div>
-                            </div>
-                            <div class="absolute top-4 right-4">
-                                <div class="bg-orange-500 text-white px-3 py-1 rounded text-sm font-bold">
-                                    FASILKOM
-                                    <span class="text-yellow-300">Unej!</span>
-                                </div>
-                            </div>
-                            <div class="text-center mt-8">
-                                <div class="bg-blue-500 text-white px-4 py-2 rounded-lg inline-block mb-4">
-                                    SOSIALISASI
-                                </div>
-                                <h1 class="text-4xl font-bold mb-2">PROGRAM</h1>
-                                <h2 class="text-3xl font-light mb-2">PEMBINAAN MAHASISWA</h2>
-                                <h2 class="text-3xl font-light">WIRAUSAHA (P2MW) <span class="font-bold">2024</span></h2>
-                            </div>
-                        </div>
+                        <img src="{{ asset('img/kegiatan1.jpg') }}" alt=""
+                            class="w-full h-auto rounded-lg shadow-lg">
                     </div>
 
                     <!-- Detail Kegiatan -->
@@ -227,12 +208,11 @@
                                 <div class="bg-white rounded-lg p-4">
                                     <h3 class="font-bold text-lg mb-3">Venue :</h3>
                                     <div class="mb-4">
-                                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDMwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjRjNGNEY2Ii8+CjxyZWN0IHg9IjUwIiB5PSI1MCIgd2lkdGg9IjIwMCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiNFNUU3RUIiLz4KPGNpcmNsZSBjeD0iMTUwIiBjeT0iMTAwIiByPSIyMCIgZmlsbD0iIzY0NzQ4QiIvPgo8dGV4dCB4PSIxNTAiIHk9IjE4NSIgZm9udC1zaXplPSIxMiIgZmlsbD0iIzM3NDE1MSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+Rm9yIGV4YW1wbGU8L3RleHQ+Cjx0ZXh0IHg9IjE1MCIgeT0iMTk4IiBmb250LXNpemU9IjEwIiBmaWxsPSIjNjU3Mzg2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5WZXJ5IGltcG9ydGFudCBpbmZvcm1hdGlvbjwvdGV4dD4KPC9zdmc+"
-                                             alt="Venue"
+                                        <img src="{{ asset('img/AuditFasilkom.png') }}" alt="Venue Image"
                                              class="w-full h-32 object-cover rounded">
                                     </div>
                                     <div class="text-sm space-y-2">
-                                        <div><strong>Lokasi:</strong> Ruang B1 & B2 Fakultas Ilmu Komputer</div>
+                                        <div><strong>Lokasi:</strong> Auditorium Lt. 5 Fakultas Ilmu Komputer</div>
                                         <div><strong>Keterangan:</strong> Offline</div>
                                         <div><strong>Tautan Zoom:</strong> -</div>
                                         <div><strong>Contact Person:</strong> +62 674 6754 6512</div>

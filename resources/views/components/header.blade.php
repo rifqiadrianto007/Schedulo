@@ -2,7 +2,7 @@
     <div class="max-w-7xl mx-auto flex items-center justify-between">
         <!-- Logo -->
         <div class="flex items-center">
-            <h1 class="text-white text-2xl font-bold">Schedulo</h1>
+            <img src="{{ asset('img/logo.png') }}" alt="Schedulo Logo" class="h-8 w-auto">
             <div class="ml-2 w-6 h-6 bg-white rounded-full flex items-center justify-center">
                 <i class="fas fa-check text-primary-blue text-sm"></i>
             </div>
@@ -21,10 +21,6 @@
             <a href="{{ route('venue') }}"
                 class="px-4 py-2 rounded-full font-medium {{ request()->routeIs('venue') ? 'bg-white text-gray-800' : 'text-white hover:bg-blue-600' }}">
                 Venue
-            </a>
-            <a href="{{ route('home') }}"
-                class="px-4 py-2 rounded-full font-medium {{ request()->routeIs('home') ? 'bg-white text-gray-800' : 'text-white hover:bg-blue-600' }}">
-                Jadwal
             </a>
         </nav>
 

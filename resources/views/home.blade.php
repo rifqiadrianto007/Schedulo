@@ -46,7 +46,7 @@
 
                     <!-- Current slide (main) -->
                     <div class="flex-shrink-0 w-1/2">
-                        <img id="currentSlideImg" src="{{ asset('img/kegiatan1.jpg') }}" alt="Current Slide"
+                        <img id="currentSlideImg" src="{{ asset('img/kegiatan2.png') }}" alt="Current Slide"
                             class="w-full h-auto rounded-lg shadow-lg">
                     </div>
 
@@ -132,7 +132,7 @@
 
                 <!-- Event Card 4 -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden border">
-                    <img src="{{ asset('img/kegiatan1.jpg') }}" alt="Event" class="w-full h-40 object-cover">
+                    <img src="{{ asset('img/kegiatan2.png') }}" alt="Event" class="w-full h-40 object-cover">
                     <div class="p-4">
                         <h3 class="font-semibold text-gray-800 mb-2">Pembinaan Mahasiswa Wirausaha(P2MW)</h3>
                         <div class="text-sm text-blue-600 bg-blue-100 px-2 py-1 rounded-full inline-block mb-3">
@@ -147,7 +147,7 @@
 
                 <!-- Event Card 5 -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden border">
-                    <img src="{{ asset('img/kegiatan1.jpg') }}" alt="Event" class="w-full h-40 object-cover">
+                    <img src="{{ asset('img/kegiatan2.png') }}" alt="Event" class="w-full h-40 object-cover">
                     <div class="p-4">
                         <h3 class="font-semibold text-gray-800 mb-2">Pembinaan Mahasiswa Wirausaha(P2MW)</h3>
                         <div class="text-sm text-blue-600 bg-blue-100 px-2 py-1 rounded-full inline-block mb-3">
@@ -162,7 +162,7 @@
 
                 <!-- Event Card 6 -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden border">
-                    <img src="{{ asset('img/kegiatan1.jpg') }}" alt="Event" class="w-full h-40 object-cover">
+                    <img src="{{ asset('img/kegiatan2.png') }}" alt="Event" class="w-full h-40 object-cover">
                     <div class="p-4">
                         <h3 class="font-semibold text-gray-800 mb-2">Pembinaan Mahasiswa Wirausaha(P2MW)</h3>
                         <div class="text-sm text-blue-600 bg-blue-100 px-2 py-1 rounded-full inline-block mb-3">
@@ -198,8 +198,12 @@
         const slides = [
             "{{ asset('img/kegiatan1.jpg') }}",
             "{{ asset('img/logo-unej.png') }}",
+            "{{ asset('img/kegiatan2.png') }}",
+            "{{ asset('img/AwardNight.png') }}",
             "{{ asset('img/kegiatan1.jpg') }}",
-            "{{ asset('img/logo-unej.png') }}"
+            "{{ asset('img/logo-unej.png') }}",
+            "{{ asset('img/kegiatan2.png') }}",
+            "{{ asset('img/AwardNight.png') }}"
         ];
 
         const dots = document.querySelectorAll('.dot');
