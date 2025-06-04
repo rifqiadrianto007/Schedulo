@@ -113,15 +113,12 @@
             const modalContent = document.getElementById('modalContent');
             modalContent.innerHTML = `
                 <!-- Header -->
-                <div class="bg-blue-600 text-white p-4 flex justify-between items-center">
+                <div class="bg-primary-blue text-white p-4 flex justify-between items-center">
                     <div class="flex items-center space-x-8">
-                        <h1 class="text-2xl font-bold">Schedul⚡</h1>
-                        <nav class="flex space-x-6">
-                            <a href="#" class="hover:text-blue-200">Home</a>
-                            <a href="#" class="bg-gray-600 px-4 py-2 rounded">Event</a>
-                            <a href="#" class="hover:text-blue-200">Venue</a>
-                            <a href="#" class="text-orange-300">Jadwal</a>
-                        </nav>
+                        <h1 class="text-white text-2xl font-bold">Schedulo</h1>
+                        <div class="ml-2 w-6 h-6 bg-white rounded-full flex items-center justify-center">
+                            <i class="fas fa-check text-primary-blue text-sm"></i>
+                        </div>
                     </div>
                     <div class="flex items-center space-x-4">
                         <span>User - 2007</span>
