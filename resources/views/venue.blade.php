@@ -28,26 +28,27 @@
 
 <body class="bg-gray-50 font-poppins" x-data="venueApp()">
     <!-- Header -->
-    <x-header/>
+    <x-header />
 
     <!-- Search Section -->
-    <div class="bg-gray-200 py-4">
+    <div class="py-4">
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4">
                 <label class="text-gray-700 font-medium">Cari Lokasi :</label>
                 <div class="flex-1 max-w-2xl w-full">
                     <input type="text" x-model="searchQuery"
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-blue"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Masukkan lokasi...">
                 </div>
                 <div class="flex space-x-2">
                     <button @click="searchVenues()"
-                        class="bg-orange-400 hover:bg-orange-500 text-white px-6 py-2 rounded font-medium transition-colors">
+                        class="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-2 rounded-lg font-medium transition-colors">
                         Search
                     </button>
-                    <button class="bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-6 py-2 rounded font-medium transition-colors">
+                    <a href="{{ route('login') }}"
+                        class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg font-medium transition-colors">
                         Ajukan Event
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -57,12 +58,13 @@
     <main class="container mx-auto px-4 py-8">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <template x-for="venue in filteredVenues" :key="venue.id">
-                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                <div
+                    class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
                     <div class="relative">
-                        <img :src="venue.image" :alt="venue.name"
-                             class="w-full h-48 object-cover"
-                             onerror="this.src={{ asset('img/AuditFasilkom.png') }}">
-                        <div class="absolute top-2 left-2 bg-yellow-400 text-gray-800 px-2 py-1 rounded text-xs font-medium">
+                        <img :src="venue.image" :alt="venue.name" class="w-full h-48 object-cover"
+                            onerror="this.src={{ asset('img/AuditFasilkom.png') }}">
+                        <div
+                            class="absolute top-2 left-2 bg-yellow-400 text-gray-800 px-2 py-1 rounded text-xs font-medium">
                             <i class="fas fa-map-marker-alt mr-1"></i>
                             <span x-text="venue.location || 'Kampus'"></span>
                         </div>
@@ -93,9 +95,9 @@
             </button>
             <template x-for="page in totalPages" :key="page">
                 <button @click="goToPage(page)"
-                    :class="currentPage === page ? 'bg-primary-blue text-white' : 'bg-white border border-gray-300 hover:bg-gray-50'"
-                    class="w-8 h-8 flex items-center justify-center rounded transition-colors"
-                    x-text="page">
+                    :class="currentPage === page ? 'bg-primary-blue text-white' :
+                        'bg-white border border-gray-300 hover:bg-gray-50'"
+                    class="w-8 h-8 flex items-center justify-center rounded transition-colors" x-text="page">
                 </button>
             </template>
             <button @click="nextPage()" :disabled="currentPage === totalPages"
@@ -106,32 +108,26 @@
     </main>
 
     <!-- Modal -->
-    <div x-show="showModal"
-         x-transition:enter="transition ease-out duration-300"
-         x-transition:enter-start="opacity-0"
-         x-transition:enter-end="opacity-100"
-         x-transition:leave="transition ease-in duration-200"
-         x-transition:leave-start="opacity-100"
-         x-transition:leave-end="opacity-0"
-         class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
-         @click.self="closeModal()"
-         @keydown.escape.window="closeModal()">
+    <div x-show="showModal" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+        @click.self="closeModal()" @keydown.escape.window="closeModal()">
 
-        <div x-show="showModal"
-             x-transition:enter="transition ease-out duration-300"
-             x-transition:enter-start="opacity-0 transform scale-95"
-             x-transition:enter-end="opacity-100 transform scale-100"
-             x-transition:leave="transition ease-in duration-200"
-             x-transition:leave-start="opacity-100 transform scale-100"
-             x-transition:leave-end="opacity-0 transform scale-95"
-             class="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <div x-show="showModal" x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0 transform scale-95"
+            x-transition:enter-end="opacity-100 transform scale-100"
+            x-transition:leave="transition ease-in duration-200"
+            x-transition:leave-start="opacity-100 transform scale-100"
+            x-transition:leave-end="opacity-0 transform scale-95"
+            class="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
 
             <div class="p-6">
                 <!-- Modal Header with Image -->
                 <div class="mb-6">
                     <img :src="selectedVenue?.image" :alt="selectedVenue?.name"
-                         class="w-full h-64 object-cover rounded-lg mb-4"
-                         onerror="this.src={{ asset('img/AuditFasilkom.png') }}">
+                        class="w-full h-64 object-cover rounded-lg mb-4"
+                        onerror="this.src={{ asset('img/AuditFasilkom.png') }}">
                     <h2 class="text-2xl font-bold text-gray-800 mb-2" x-text="selectedVenue?.name"></h2>
                     <p class="text-gray-600 flex items-center">
                         <i class="fas fa-map-marker-alt mr-2 text-yellow-500"></i>
@@ -180,7 +176,8 @@
                         class="bg-gray-400 hover:bg-gray-500 text-white px-8 py-2 rounded font-medium transition-colors">
                         Kembali
                     </button>
-                    <button class="bg-primary-blue hover:bg-blue-700 text-white px-8 py-2 rounded font-medium transition-colors">
+                    <button
+                        class="bg-primary-blue hover:bg-blue-700 text-white px-8 py-2 rounded font-medium transition-colors">
                         Booking Sekarang
                     </button>
                 </div>
@@ -189,7 +186,7 @@
     </div>
 
     <!-- Footer -->
-    <x-footer/>
+    <x-footer />
 
     <script>
         function venueApp() {
@@ -199,13 +196,12 @@
                 searchQuery: '',
                 currentPage: 1,
                 itemsPerPage: 6,
-                venues: [
-                    {
+                venues: [{
                         id: 1,
                         name: 'Ruang Kelas B1 & B2',
                         address: 'Jl. Kalimantan No.37, Kampus Tegalboto',
                         location: 'Kampus',
-                        image: '{{ asset("img/AuditFasilkom.png") }}',
+                        image: '{{ asset('img/AuditFasilkom.png') }}',
                         facilities: [
                             'Air Conditioner (2)',
                             'Kursi Lipat (150)',
@@ -225,7 +221,7 @@
                         name: 'Auditorium Utama',
                         address: 'Jl. Kalimantan No.37, Kampus Tegalboto',
                         location: 'Kampus',
-                        image: '{{ asset("img/AuditFasilkom.png") }}',
+                        image: '{{ asset('img/AuditFasilkom.png') }}',
                         facilities: [
                             'Air Conditioner (4)',
                             'Kursi Theater (300)',
@@ -247,7 +243,7 @@
                         name: 'Ruang Seminar C1',
                         address: 'Jl. Kalimantan No.37, Kampus Tegalboto',
                         location: 'Kampus',
-                        image: '{{ asset("img/AuditFasilkom.png") }}',
+                        image: '{{ asset('img/AuditFasilkom.png') }}',
                         facilities: [
                             'Air Conditioner (1)',
                             'Kursi Lipat (50)',
