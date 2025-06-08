@@ -21,3 +21,15 @@ Route::get('venue', function () {
 Route::get('event', function () {
     return view('event');
 })->name('event');
+
+Route::get('admDashboard', function () {
+    return view('admDashboard');
+})->name('admDashboard');
+
+Route::get('admEvent', function () {
+    return view('admEvent');
+})->name('admEvent');
+
+Route::get('admVenue', function () {
+    return view('admVenue');
+})->name('admVenue');
