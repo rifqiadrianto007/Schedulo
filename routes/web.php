@@ -40,3 +40,7 @@ Route::get('admEvent', function () {
 Route::get('admVenue', function () {
     return view('admVenue');
 })->name('admVenue');
+
+Route::get('formEvent', function () {
+    return view('formEvent');
+})->name('formEvent');
