@@ -43,18 +43,18 @@
         <h2 class="text-gray-800 font-semibold text-center mb-12 text-lg max-w-xs">
             Selamat Datang Di Schedulo!
         </h2>
-        <form class="w-full max-w-md space-y-4">
-            <input
+        <form method="POST" action="{{ route('login.proses') }}" class="w-full max-w-md space-y-4">
+            @csrf
+            <input name="email"
                 class="w-full rounded-md border border-gray-600 px-4 py-3 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#1e5ebd]"
-                placeholder="User Name" type="text" />
+                placeholder="Email" type="text" />
             <div class="relative">
-                <input
+                <input name="password"
                     class="w-full rounded-md border border-gray-600 px-4 py-3 pr-12 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#1e5ebd]"
                     placeholder="Password" type="password" />
                 <span aria-label="Toggle password visibility"
                     class="absolute inset-y-0 right-3 flex items-center text-gray-400 cursor-pointer">
-                    <i class="fas fa-eye-slash fa-lg">
-                    </i>
+                    <i class="fas fa-eye-slash fa-lg"></i>
                 </span>
             </div>
             <p class="text-center text-xs text-gray-700">
@@ -63,10 +63,10 @@
                     Daftar!
                 </a>
             </p>
-            <a href="{{ route('home') }}"
-                class="w-full bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-medium rounded-md py-3 text-base transition-colors inline-block text-center">
+            <button type="submit"
+                class="w-full bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-medium rounded-md py-3 text-base transition-colors">
                 Masuk
-            </a>
+            </button>
         </form>
     </main>
 </body>
