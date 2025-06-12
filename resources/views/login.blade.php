@@ -43,6 +43,19 @@
         <h2 class="text-gray-800 font-semibold text-center mb-12 text-lg max-w-xs">
             Selamat Datang Di Schedulo!
         </h2>
+
+         @if ($errors->any())
+        <div class="w-full max-w-md mb-4">
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+                <ul class="list-disc pl-5">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+        @endif
+
         <form method="POST" action="{{ route('login.proses') }}" class="w-full max-w-md space-y-4">
             @csrf
             <input name="email"

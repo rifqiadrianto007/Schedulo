@@ -13,10 +13,6 @@ Route::get('login', function () {
 
 Route::post('/login', [AuthController::class, 'proses'])->name('login.proses');
 
-Route::get('/admin', function() {
-    return 'Dashboard admin';
-})->name('admin.dashboard')->middleware('auth');
-
 Route::get('regis', function () {
     return view('regis');
 })->name('regis');
@@ -31,7 +27,7 @@ Route::get('event', function () {
 
 Route::get('admDashboard', function () {
     return view('admDashboard');
-})->name('admDashboard');
+})->name('admDashboard')->middleware('auth');
 
 Route::get('admEvent', function () {
     return view('admEvent');
