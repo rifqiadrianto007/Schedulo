@@ -1,37 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <title>
-        Schedulo
-    </title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    {{-- @vite(['resources/css/app.css', 'resources/js/home.js']) --}}
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&amp;display=swap" rel="stylesheet" />
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'primary-blue': '#1565c0',
-                        'schedul-blue': '#4A90E2'
-                    },
-                    fontFamily: {
-                        'poppins': ['Poppins', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
-</head>
-
-<body class="bg-gray-50">
-    <!-- Header -->
-    <x-header />
-
+@section('content')
     <!-- Hero Carousel Section -->
     <section class="bg-gray-100 py-8">
         <div class="max-w-6xl mx-auto px-4">
@@ -39,6 +8,7 @@
                 <!-- Carousel Container with 3-slide preview -->
                 <div class="flex items-center justify-center space-x-4">
                     <!-- Previous slide (with opacity) -->
+
                     <div class="flex-shrink-0 w-1/4 opacity-40 transform scale-90">
                         <img id="prevSlideImg" src="{{ asset('img/kegiatan1.jpg') }}" alt="Previous Slide"
                             class="w-full h-auto rounded-lg shadow-lg">
@@ -85,186 +55,34 @@
 
             <!-- Events Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                <!-- Event Card 1 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden border">
-                    <img src="{{ asset('img/kegiatan1.jpg') }}" alt="Event" class="w-full h-40 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-semibold text-gray-800 mb-2">Pembinaan Mahasiswa Wirausaha(P2MW)</h3>
-                        <div class="text-sm text-blue-600 bg-blue-100 px-2 py-1 rounded-full inline-block mb-3">
-                            24 Jan - 24 Jan
+                @for ($i = 1; $i <= 6; $i++)
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden border">
+                        <img src="{{ asset('img/kegiatan' . (($i % 2) + 1) . '.png') }}" alt="Event"
+                            class="w-full h-40 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-800 mb-2">Pembinaan Mahasiswa Wirausaha (P2MW)</h3>
+                            <div class="text-sm text-blue-600 bg-blue-100 px-2 py-1 rounded-full inline-block mb-3">
+                                24 Jan - 24 Jan
+                            </div>
+                            <button
+                                class="w-full bg-gray-400 text-white py-2 px-4 rounded-lg font-medium hover:bg-gray-500">
+                                Detail
+                            </button>
                         </div>
-                        <button
-                            class="w-full bg-gray-400 text-white py-2 px-4 rounded-lg font-medium hover:bg-gray-500">
-                            Detail
-                        </button>
                     </div>
-                </div>
-
-                <!-- Event Card 2 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden border">
-                    <img src="{{ asset('img/kegiatan1.jpg') }}" alt="Event" class="w-full h-40 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-semibold text-gray-800 mb-2">Pembinaan Mahasiswa Wirausaha(P2MW)</h3>
-                        <div class="text-sm text-blue-600 bg-blue-100 px-2 py-1 rounded-full inline-block mb-3">
-                            24 Jan - 24 Jan
-                        </div>
-                        <button
-                            class="w-full bg-gray-400 text-white py-2 px-4 rounded-lg font-medium hover:bg-gray-500">
-                            Detail
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Event Card 3 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden border">
-                    <img src="{{ asset('img/kegiatan1.jpg') }}" alt="Event" class="w-full h-40 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-semibold text-gray-800 mb-2">Pembinaan Mahasiswa Wirausaha(P2MW)</h3>
-                        <div class="text-sm text-blue-600 bg-blue-100 px-2 py-1 rounded-full inline-block mb-3">
-                            24 Jan - 24 Jan
-                        </div>
-                        <button
-                            class="w-full bg-gray-400 text-white py-2 px-4 rounded-lg font-medium hover:bg-gray-500">
-                            Detail
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Event Card 4 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden border">
-                    <img src="{{ asset('img/kegiatan2.png') }}" alt="Event" class="w-full h-40 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-semibold text-gray-800 mb-2">Pembinaan Mahasiswa Wirausaha(P2MW)</h3>
-                        <div class="text-sm text-blue-600 bg-blue-100 px-2 py-1 rounded-full inline-block mb-3">
-                            24 Jan - 24 Jan
-                        </div>
-                        <button
-                            class="w-full bg-gray-400 text-white py-2 px-4 rounded-lg font-medium hover:bg-gray-500">
-                            Detail
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Event Card 5 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden border">
-                    <img src="{{ asset('img/kegiatan2.png') }}" alt="Event" class="w-full h-40 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-semibold text-gray-800 mb-2">Pembinaan Mahasiswa Wirausaha(P2MW)</h3>
-                        <div class="text-sm text-blue-600 bg-blue-100 px-2 py-1 rounded-full inline-block mb-3">
-                            24 Jan - 24 Jan
-                        </div>
-                        <button
-                            class="w-full bg-gray-400 text-white py-2 px-4 rounded-lg font-medium hover:bg-gray-500">
-                            Detail
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Event Card 6 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden border">
-                    <img src="{{ asset('img/kegiatan2.png') }}" alt="Event" class="w-full h-40 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-semibold text-gray-800 mb-2">Pembinaan Mahasiswa Wirausaha(P2MW)</h3>
-                        <div class="text-sm text-blue-600 bg-blue-100 px-2 py-1 rounded-full inline-block mb-3">
-                            24 Jan - 24 Jan
-                        </div>
-                        <button
-                            class="w-full bg-gray-400 text-white py-2 px-4 rounded-lg font-medium hover:bg-gray-500">
-                            Detail
-                        </button>
-                    </div>
-                </div>
+                @endfor
             </div>
 
             <!-- More Button -->
             <div class="text-center">
-                <button
-                    class="bg-yellow-400 text-black px-8 py-3 rounded-lg font-bold text-lg hover:bg-yellow-500 w-full">
+                <button class="bg-yellow-400 text-black px-8 py-3 rounded-lg font-bold text-lg hover:bg-yellow-500 w-full">
                     More
                 </button>
             </div>
         </div>
     </section>
+@endsection
 
-    <!-- Footer -->
-    <x-footer />
-
-    <script>
-        // Carousel functionality
-        let currentSlide = 0;
-        const totalSlides = 4;
-
-        // Array of slide images
-        const slides = [
-            "{{ asset('img/kegiatan1.jpg') }}",
-            "{{ asset('img/logo-unej.png') }}",
-            "{{ asset('img/kegiatan2.png') }}",
-            "{{ asset('img/AwardNight.png') }}",
-            "{{ asset('img/kegiatan1.jpg') }}",
-            "{{ asset('img/logo-unej.png') }}",
-            "{{ asset('img/kegiatan2.png') }}",
-            "{{ asset('img/AwardNight.png') }}"
-        ];
-
-        const dots = document.querySelectorAll('.dot');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const currentSlideImg = document.getElementById('currentSlideImg');
-        const prevSlideImg = document.getElementById('prevSlideImg');
-        const nextSlideImg = document.getElementById('nextSlideImg');
-
-        function getSlideIndex(offset) {
-            return (currentSlide + offset + totalSlides) % totalSlides;
-        }
-
-        function updateCarousel() {
-            // Update main slide image
-            currentSlideImg.src = slides[currentSlide];
-
-            // Update preview images
-            prevSlideImg.src = slides[getSlideIndex(-1)];
-            nextSlideImg.src = slides[getSlideIndex(1)];
-
-            // Update dots
-            dots.forEach((dot, index) => {
-                if (index === currentSlide) {
-                    dot.classList.remove('bg-gray-300');
-                    dot.classList.add('bg-gray-400', 'active');
-                } else {
-                    dot.classList.remove('bg-gray-400', 'active');
-                    dot.classList.add('bg-gray-300');
-                }
-            });
-        }
-
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            updateCarousel();
-        }
-
-        function prevSlide() {
-            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-            updateCarousel();
-        }
-
-        // Event listeners for navigation
-        nextBtn.addEventListener('click', nextSlide);
-        prevBtn.addEventListener('click', prevSlide);
-
-        // Dot navigation
-        dots.forEach((dot, index) => {
-            dot.addEventListener('click', () => {
-                currentSlide = index;
-                updateCarousel();
-            });
-        });
-
-        // Auto-play carousel
-        setInterval(nextSlide, 5000);
-
-        // Initialize carousel
-        updateCarousel();
-    </script>
-</body>
-
-</html>
+@push('scripts')
+    <script src="{{ asset('js/home.js') }}"></script>
+@endpush
