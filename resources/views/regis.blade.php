@@ -1,23 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <title>
-        Schedulo
-    </title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    @vite('resources/css/app.css')
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&amp;display=swap" rel="stylesheet" />
-    <style>
-        body {
-            font-family: "Poppins", sans-serif;
-        }
-    </style>
-</head>
-
+@section('content')
 <body class="bg-[#e8eef2] min-h-screen flex flex-col">
     <header class="bg-[#1e5ebd] p-4 flex items-center">
         <img alt="Schedulo logo clock icon white on blue background" class="mr-2" height="40"
@@ -69,6 +52,4 @@
             </a>
         </form>
     </main>
-</body>
-
-</html>
+@endsection

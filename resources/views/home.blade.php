@@ -55,7 +55,7 @@
 
             <!-- Events Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                @for ($i = 1; $i <= 6; $i++)
+                @for ($i = 1; $i <= 12; $i++)
                     <div class="bg-white rounded-lg shadow-md overflow-hidden border">
                         <img src="{{ asset('img/kegiatan' . (($i % 2) + 1) . '.png') }}" alt="Event"
                             class="w-full h-40 object-cover">

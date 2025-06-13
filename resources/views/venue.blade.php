@@ -1,36 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <title>Schedulo</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.3/cdn.min.js" defer></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'primary-blue': '#1565c0',
-                        'schedul-blue': '#4A90E2'
-                    },
-                    fontFamily: {
-                        'poppins': ['Poppins', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
-</head>
-
-<body class="bg-gray-50 font-poppins" x-data="venueApp()">
-    <!-- Header -->
-    <x-header />
-
-    <!-- Search Section -->
+@section('content')
     <div class="py-4">
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4">
@@ -58,8 +28,7 @@
     <main class="container mx-auto px-4 py-8">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <template x-for="venue in filteredVenues" :key="venue.id">
-                <div
-                    class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
                     <div class="relative">
                         <img :src="venue.image" :alt="venue.name" class="w-full h-48 object-cover"
                             onerror="this.src={{ asset('img/AuditFasilkom.png') }}">
@@ -111,14 +80,12 @@
     <div x-show="showModal" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
         x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200"
         x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
-        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
-        @click.self="closeModal()" @keydown.escape.window="closeModal()">
+        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" @click.self="closeModal()"
+        @keydown.escape.window="closeModal()">
 
         <div x-show="showModal" x-transition:enter="transition ease-out duration-300"
-            x-transition:enter-start="opacity-0 transform scale-95"
-            x-transition:enter-end="opacity-100 transform scale-100"
-            x-transition:leave="transition ease-in duration-200"
-            x-transition:leave-start="opacity-100 transform scale-100"
+            x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100"
+            x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 transform scale-100"
             x-transition:leave-end="opacity-0 transform scale-95"
             class="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
 
@@ -184,10 +151,9 @@
             </div>
         </div>
     </div>
+@endsection
 
-    <!-- Footer -->
-    <x-footer />
-
+@push('scripts')
     <script>
         function venueApp() {
             return {
@@ -312,6 +278,4 @@
             }
         }
     </script>
-</body>
-
-</html>
+@endpush
