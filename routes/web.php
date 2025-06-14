@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Middleware\auth;
 
 Route::get('/', function () {
     return view('home');
@@ -12,6 +13,8 @@ Route::get('login', function () {
 })->name('login');
 
 Route::post('/login', [AuthController::class, 'proses'])->name('login.proses');
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
 Route::get('regis', function () {
     return view('regis');
@@ -27,15 +30,15 @@ Route::get('event', function () {
 
 Route::get('admDashboard', function () {
     return view('admDashboard');
-})->name('admDashboard')->middleware('auth');
+})->name('admDashboard')->middleware('auth', 'admin');
 
 Route::get('admEvent', function () {
     return view('admEvent');
-})->name('admEvent');
+})->name('admEvent')->middleware('auth', 'admin');
 
 Route::get('admVenue', function () {
     return view('admVenue');
-})->name('admVenue');
+})->name('admVenue')->middleware('auth', 'admin');
 
 Route::get('formEvent', function () {
     return view('formEvent');

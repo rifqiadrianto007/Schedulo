@@ -17,7 +17,7 @@
 
             <!-- Logout Button - Fixed at bottom -->
             <div class="mt-auto pt-4">
-                <form method="POST" action="{{ route('login') }}">
+                <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit"
                         class="w-full px-4 py-3 bg-red-500 hover:bg-red-600 text-white font-medium rounded-lg transition-colors flex items-center justify-center">
