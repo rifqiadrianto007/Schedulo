@@ -42,13 +42,13 @@
 
             <form method="POST" action="{{ route('login.proses') }}" class="w-full max-w-md space-y-4">
                 @csrf
-                <input name="email"
+                <input name="nomor_induk"
                     class="w-full rounded-md border border-gray-600 px-4 py-3 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#1e5ebd]"
-                    placeholder="Email" type="text" />
+                    placeholder="Masukkan NIM/NIP" type="text" />
                 <div class="relative">
                     <input name="password"
                         class="w-full rounded-md border border-gray-600 px-4 py-3 pr-12 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#1e5ebd]"
-                        placeholder="Password" type="password" />
+                        placeholder="Masukkan Password" type="password" />
                     <span aria-label="Toggle password visibility"
                         class="absolute inset-y-0 right-3 flex items-center text-gray-400 cursor-pointer">
                         <i class="fas fa-eye-slash fa-lg"></i>

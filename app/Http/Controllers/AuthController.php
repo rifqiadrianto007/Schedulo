@@ -10,9 +10,13 @@ class AuthController extends Controller
 {
     public function proses(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->validate([
+            'nomor_induk' => ['required'],
+            'password' => ['required'],
+        ]);
 
-        if (Auth::attempt($credentials)) {
+        // modifikasi Auth::attempt supaya pakai 'nomor_induk'
+        if (Auth::attempt(['nomor_induk' => $credentials['nomor_induk'], 'password' => $credentials['password']])) {
             $request->session()->regenerate();
 
             $user = Auth::user();
@@ -25,7 +29,16 @@ class AuthController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'Email atau password salah.',
+            'nomor_induk' => 'Nomor Induk atau password salah.',
         ]);
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login');
     }
 }

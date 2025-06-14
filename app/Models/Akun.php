@@ -13,7 +13,7 @@ class Akun extends Authenticatable
 
     protected $fillable = [
         'nama',
-        'email',
+        'nomor_induk',
         'password',
         'role',
     ];
@@ -21,4 +21,9 @@ class Akun extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
+    public function getAuthIdentifierName()
+    {
+        return 'nomor_induk';
+    }
 }

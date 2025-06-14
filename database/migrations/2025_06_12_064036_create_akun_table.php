@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('akun', function (Blueprint $table) {
             $table->id();
         $table->string('nama');
-        $table->string('email')->unique();
         $table->string('password');
         $table->string('role')->default('user');
+        $table->string('nomor_induk')->unique();
         $table->timestamps();
     });
     }
@@ -29,5 +29,5 @@ return new class extends Migration
         Schema::dropIfExists('akun');
     }
 
-    
+
 };
