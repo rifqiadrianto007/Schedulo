@@ -21,6 +21,8 @@ Route::get('regis', function () {
     return view('regis');
 })->name('regis');
 
+Route::post('/regis', [AuthController::class, 'register'])->name('register.proses');
+
 Route::get('venue', function () {
     return view('venue');
 })->name('venue');
