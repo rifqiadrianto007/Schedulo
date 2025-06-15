@@ -17,10 +17,18 @@
                         class="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-2 rounded-lg font-medium transition-colors">
                         Search
                     </button>
-                    <a href="{{ route('login') }}"
-                        class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg font-medium transition-colors">
-                        Ajukan Event
-                    </a>
+                    @auth
+                        <a href="{{ route('form.event') }}"
+                            class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg font-medium transition-colors">
+                            Ajukan Event
+                        </a>
+                    @else
+                        <a href="{{ route('login') }}"
+                            class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg font-medium transition-colors">
+                            Ajukan Event
+                        </a>
+                    @endauth
+
                 </div>
             </div>
         </div>

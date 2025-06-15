@@ -15,10 +15,20 @@
                         class="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-2 rounded-lg font-medium transition-colors">
                         Search
                     </button>
-                    <a href="{{ route('login') }}"
-                        class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg font-medium transition-colors">
-                        Ajukan Event
-                    </a>
+                    <div class="flex space-x-2">
+                        @auth
+                            <a href="{{ route('form.event') }}"
+                                class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg font-medium transition-colors">
+                                Ajukan Event
+                            </a>
+                        @else
+                            <a href="{{ route('login') }}"
+                                class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg font-medium transition-colors">
+                                Ajukan Event
+                            </a>
+                        @endauth
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -27,10 +37,13 @@
         <main class="container mx-auto px-4 py-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <template x-for="venue in paginatedVenues" :key="venue.id">
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                    <div
+                        class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
                         <div class="relative">
-                            <img :src="venue.image"  :alt="venue.nama_tempat" class="w-full h-48 object-cover" :onerror="'this.src=\'' + fallbackImage + '\''">
-                            <div class="absolute top-2 left-2 bg-yellow-400 text-gray-800 px-2 py-1 rounded text-xs font-medium">
+                            <img :src="venue.image" :alt="venue.nama_tempat" class="w-full h-48 object-cover"
+                                :onerror="'this.src=\'' + fallbackImage + '\''">
+                            <div
+                                class="absolute top-2 left-2 bg-yellow-400 text-gray-800 px-2 py-1 rounded text-xs font-medium">
                                 <i class="fas fa-map-marker-alt mr-1"></i>
                                 <span>Kampus</span>
                             </div>
@@ -112,64 +125,64 @@
 
 <script>
     function venueApp(venuesFromLaravel) {
-    return {
-        showModal: false,
-        selectedVenue: null,
-        searchQuery: '',
-        currentPage: 1,
-        itemsPerPage: 6,
-        fallbackImage: '/img/AuditFasilkom.png',
-        venues: venuesFromLaravel,
+        return {
+            showModal: false,
+            selectedVenue: null,
+            searchQuery: '',
+            currentPage: 1,
+            itemsPerPage: 6,
+            fallbackImage: '/img/AuditFasilkom.png',
+            venues: venuesFromLaravel,
 
-        get filteredVenues() {
-            if (!this.searchQuery.trim()) return this.venues;
-            const keyword = this.searchQuery.toLowerCase();
-            return this.venues.filter(venue =>
-                venue.nama_tempat.toLowerCase().includes(keyword) ||
-                venue.alamat.toLowerCase().includes(keyword)
-            );
-        },
+            get filteredVenues() {
+                if (!this.searchQuery.trim()) return this.venues;
+                const keyword = this.searchQuery.toLowerCase();
+                return this.venues.filter(venue =>
+                    venue.nama_tempat.toLowerCase().includes(keyword) ||
+                    venue.alamat.toLowerCase().includes(keyword)
+                );
+            },
 
-        get totalPages() {
-            return Math.ceil(this.filteredVenues.length / this.itemsPerPage);
-        },
+            get totalPages() {
+                return Math.ceil(this.filteredVenues.length / this.itemsPerPage);
+            },
 
-        get paginatedVenues() {
-            const start = (this.currentPage - 1) * this.itemsPerPage;
-            return this.filteredVenues.slice(start, start + this.itemsPerPage);
-        },
+            get paginatedVenues() {
+                const start = (this.currentPage - 1) * this.itemsPerPage;
+                return this.filteredVenues.slice(start, start + this.itemsPerPage);
+            },
 
-        searchVenues() {
-            this.currentPage = 1;
-        },
+            searchVenues() {
+                this.currentPage = 1;
+            },
 
-        openModal(venue) {
-            this.selectedVenue = venue;
-            this.showModal = true;
-            document.body.style.overflow = 'hidden';
-        },
+            openModal(venue) {
+                this.selectedVenue = venue;
+                this.showModal = true;
+                document.body.style.overflow = 'hidden';
+            },
 
-        closeModal() {
-            this.showModal = false;
-            document.body.style.overflow = 'auto';
-            setTimeout(() => {
-                this.selectedVenue = null;
-            }, 200);
-        },
+            closeModal() {
+                this.showModal = false;
+                document.body.style.overflow = 'auto';
+                setTimeout(() => {
+                    this.selectedVenue = null;
+                }, 200);
+            },
 
-        goToPage(page) {
-            this.currentPage = page;
-        },
+            goToPage(page) {
+                this.currentPage = page;
+            },
 
-        previousPage() {
-            if (this.currentPage > 1) this.currentPage--;
-        },
+            previousPage() {
+                if (this.currentPage > 1) this.currentPage--;
+            },
 
-        nextPage() {
-            if (this.currentPage < this.totalPages) this.currentPage++;
+            nextPage() {
+                if (this.currentPage < this.totalPages) this.currentPage++;
+            }
         }
     }
-}
 </script>
 
 {{-- @push('scripts')
