@@ -24,12 +24,36 @@
             </a>
         </nav>
 
-        <!-- Login Button -->
-        <div class="flex items-center">
-            <a href="{{ route('login') }}"
-                class="bg-yellow-400 text-black px-4 py-2 rounded-full font-bold text-sm hover:bg-yellow-500 inline-block text-center">
-                MASUK
-            </a>
+        <!-- User Authentication -->
+        <div class="flex items-center relative" x-data="{ open: false }">
+            @if (Auth::check())
+                <!-- Sudah Login -->
+                <div @click="open = !open" class="flex items-center space-x-2 cursor-pointer">
+                    <span class="text-white font-semibold text-sm">
+                        {{ Auth::user()->nama }}
+                    </span>
+                    <img src="{{ asset('img/avatar.svg') }}" alt="User Avatar" class="w-8 h-8 rounded-full">
+                </div>
+
+                <!-- Dropdown -->
+                <div x-show="open" @click.away="open = false"
+                    class="absolute top-12 right-0 bg-white text-sm shadow-lg rounded-md overflow-hidden z-50"
+                    x-transition>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">
+                            Logout
+                        </button>
+                    </form>
+                </div>
+            @else
+                <!-- Belum Login -->
+                <a href="{{ route('login') }}"
+                    class="bg-yellow-400 text-black px-4 py-2 rounded-full font-bold text-sm hover:bg-yellow-500 inline-block text-center">
+                    MASUK
+                </a>
+            @endif
         </div>
+
     </div>
 </header>

@@ -51,7 +51,6 @@ Route::get('admEvent', function () {
     return view('admEvent');
 })->name('admEvent')->middleware('auth', 'admin');
 
-
 Route::get('formEvent', function () {
     return view('formEvent');
 })->name('formEvent');
