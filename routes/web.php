@@ -23,9 +23,7 @@ Route::get('regis', function () {
 
 Route::post('/regis', [AuthController::class, 'register'])->name('register.proses');
 
-Route::get('venue', function () {
-    return view('venue');
-})->name('venue');
+Route::get('venue', [VenueController::class, 'showUserVenue'])->name('venue');
 
 Route::get('admVenue/tambah', [VenueController::class, 'create'])->name('admVenue.tambah')->middleware('auth', 'admin');
 

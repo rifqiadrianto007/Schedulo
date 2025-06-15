@@ -8,6 +8,17 @@ use Illuminate\Support\Facades\Storage;
 
 class VenueController extends Controller
 {
+public function showUserVenue()
+{
+    $venues = Venue::all()->map(function($venue) {
+        $venue->facilities = array_map('trim', explode(',', $venue->fasilitas));
+        $venue->rules = array_map('trim', explode(',', $venue->ketentuan));
+        $venue->image = asset('storage/' . $venue->gambar_venue);
+        return $venue;
+    });
+
+    return view('venue', compact('venues'));
+}
     public function index()
 {
     $venues = Venue::all();
