@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Akun;
 
 class AuthController extends Controller
@@ -40,5 +41,23 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('login');
+    }
+
+    public function register(Request $request)
+    {
+        $validated = $request->validate([
+            'nama' => 'required|string|max:255',
+            'nomor_induk' => 'required|string|unique:akun,nomor_induk',
+            'password' => 'required|string|min:6',
+        ]);
+
+        Akun::create([
+            'nama' => $validated['nama'],
+            'nomor_induk' => $validated['nomor_induk'],
+            'password' => Hash::make($validated['password']),
+            'role' => 'user',
+        ]);
+
+        return redirect()->route('login')->with('success', 'Registrasi berhasil! Silakan login.');
     }
 }

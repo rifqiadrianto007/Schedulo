@@ -62,35 +62,41 @@
                 </div>
             </div>
 
-            <!-- Login Form -->
-            <form id="loginForm" class="w-full space-y-4" onsubmit="handleLogin(event)">
+            <!-- Regis Form -->
+            <form action="{{ route('register.proses') }}" method="POST" class="w-full max-w-md space-y-4">
+                @csrf
                 <div>
-                    <input id="username" name="username"
-                        class="w-full rounded-md border border-gray-600 px-4 py-3 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#1e5ebd] focus:border-[#1e5ebd]"
-                        placeholder="User Name" type="text" required />
+                    <input name="nama"
+                        class="w-full rounded-md border border-gray-600 px-4 py-3 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#1e5ebd]"
+                        placeholder="Nama Lengkap" type="text" required />
                 </div>
 
-                <div class="relative">
-                    <input id="password" name="password"
-                        class="w-full rounded-md border border-gray-600 px-4 py-3 pr-12 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#1e5ebd] focus:border-[#1e5ebd]"
+                <div>
+                    <input name="nomor_induk"
+                        class="w-full rounded-md border border-gray-600 px-4 py-3 pr-12 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#1e5ebd]"
+                        placeholder="Nomor Induk" type="text" required />
+                </div>
+
+                <div>
+                    <input name="password"
+                        class="w-full rounded-md border border-gray-600 px-4 py-3 pr-12 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#1e5ebd]"
                         placeholder="Password" type="password" required />
-                    <button type="button" onclick="togglePassword()"
-                        class="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-gray-600 focus:outline-none">
-                        <i id="password-icon" class="fas fa-eye-slash fa-lg"></i>
-                    </button>
+                    <span aria-label="Toggle password visibility"
+                        class="absolute inset-y-0 right-3 flex items-center text-gray-400 cursor-pointer">
+                        <i class="fas fa-eye-slash fa-lg"></i>
+                    </span>
                 </div>
-
-                <p class="text-center text-sm text-gray-600">
+                <p class="text-center text-xs text-gray-700">
                     Sudah punya akun?
-                    <a class="text-[#5a6dfd] font-semibold" href="{{ route('login') }}">
+                    <a href="{{ route('login') }}" class="text-[#5a6dfd] font-semibold">
                         Login!
                     </a>
                 </p>
 
-                <a href="{{ route('login') }}"
-                    class="w-full bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-medium rounded-md py-3 text-base transition-colors inline-block text-center">
-                    Masuk
-                </a>
+                <button type="submit"
+                    class="w-full bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-medium rounded-md py-3 text-base transition-colors">
+                    Daftar
+                </button>
             </form>
         </div>
     </main>

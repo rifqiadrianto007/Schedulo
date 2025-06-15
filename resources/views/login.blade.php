@@ -26,73 +26,57 @@
         rel="stylesheet" />
 </head>
 
-<body class="bg-gray-50 font-poppins min-h-screen flex flex-col">
-    <!-- Header -->
+<body class="bg-[#e8eef2] min-h-screen flex flex-col">
     <header class="bg-[#1e5ebd] p-4 flex items-center">
         <div class="flex items-center">
-            <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center mr-3">
-                <svg class="w-6 h-6 text-[#1e5ebd]" fill="none" stroke="currentColor" stroke-linecap="round"
-                    stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <polyline points="12,6 12,12 16,14"></polyline>
-                </svg>
-            </div>
-            <div class="flex items-center">
-                <img src="{{ asset('img/logo.png') }}" alt="Schedulo Logo" class="h-8 w-auto">
-                <div class="ml-2 w-6 h-6 bg-white rounded-full flex items-center justify-center">
-                    <i class="fas fa-check text-primary-blue text-sm"></i>
-                </div>
+            <img src="{{ asset('img/logo.png') }}" alt="Schedulo Logo" class="h-8 w-auto">
+            <div class="ml-2 w-6 h-6 bg-white rounded-full flex items-center justify-center">
+                <i class="fas fa-check text-primary-blue text-sm"></i>
             </div>
         </div>
     </header>
+    <main class="flex-grow flex flex-col justify-center items-center px-4">
+        <h2 class="text-gray-800 font-semibold text-center mb-12 text-lg max-w-xs">
+            Selamat Datang Di Schedulo!
+        </h2>
 
-    <!-- Main Content -->
-    <main class="flex-grow flex flex-col justify-center items-center px-4 py-8">
-        <div class="w-full max-w-md">
-            <h2 class="text-gray-800 font-semibold text-center mb-8 text-xl">
-                Selamat Datang Di Schedulo!
-            </h2>
-
-            <!-- Error Messages (Hidden by default, would be shown by backend) -->
-            <div id="error-container" class="w-full mb-4 hidden">
+        @if ($errors->any())
+            <div class="w-full max-w-md mb-4">
                 <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
-                    <ul class="list-disc pl-5" id="error-list">
-                        <!-- Error messages would be populated here -->
+                    <ul class="list-disc pl-5">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
+        @endif
 
-            <!-- Login Form -->
-            <form id="loginForm" class="w-full space-y-4" onsubmit="handleLogin(event)">
-                <div>
-                    <input id="email" name="email"
-                        class="w-full rounded-md border border-gray-300 px-4 py-3 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#1e5ebd] focus:border-[#1e5ebd]"
-                        placeholder="Email" type="email" required />
-                </div>
-
-                <div class="relative">
-                    <input id="password" name="password"
-                        class="w-full rounded-md border border-gray-300 px-4 py-3 pr-12 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#1e5ebd] focus:border-[#1e5ebd]"
-                        placeholder="Password" type="password" required />
-                    <button type="button" onclick="togglePassword()"
-                        class="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-gray-600 focus:outline-none">
-                        <i id="password-icon" class="fas fa-eye-slash"></i>
-                    </button>
-                </div>
-
-                <p class="text-center text-sm text-gray-600">
-                    Belum punya akun?
-                    <a class="text-[#5a6dfd] font-semibold" href="{{ route('regis') }}">
-                        Daftar!
-                    </a>
-                </p>
-
-                <a href="{{ route('home') }}"
-                    class="w-full bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-medium rounded-md py-3 text-base transition-colors inline-block text-center">
-                    Masuk
+        <form method="POST" action="{{ route('login.proses') }}" class="w-full max-w-md space-y-4">
+            @csrf
+            <input name="nomor_induk"
+                class="w-full rounded-md border border-gray-600 px-4 py-3 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#1e5ebd]"
+                placeholder="Masukkan NIM/NIP" type="text" />
+            <div class="relative">
+                <input name="password"
+                    class="w-full rounded-md border border-gray-600 px-4 py-3 pr-12 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#1e5ebd]"
+                    placeholder="Masukkan Password" type="password" />
+                <span aria-label="Toggle password visibility"
+                    class="absolute inset-y-0 right-3 flex items-center text-gray-400 cursor-pointer">
+                    <i class="fas fa-eye-slash fa-lg"></i>
+                </span>
+            </div>
+            <p class="text-center text-xs text-gray-700">
+                Belum punya akun?
+                <a href="{{ route('regis') }}" class="text-[#5a6dfd] font-semibold">
+                    Daftar!
                 </a>
-            </form>
-        </div>
+            </p>
+            <button type="submit"
+                class="w-full bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-medium rounded-md py-3 text-base transition-colors">
+                Masuk
+            </button>
+        </form>
     </main>
 
     <!-- Footer -->
@@ -115,22 +99,27 @@
         function handleLogin(event) {
             event.preventDefault();
 
-            const email = document.getElementById('email').value;
+            const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
             // Basic validation
-            if (!email || !password) {
-                showError(['Email dan password harus diisi!']);
+            if (!username || !password) {
+                showError(['Username dan password harus diisi!']);
                 return;
             }
 
-            if (!isValidEmail(email)) {
-                showError(['Format email tidak valid!']);
+            if (username.length < 3) {
+                showError(['Username minimal 3 karakter!']);
+                return;
+            }
+
+            if (password.length < 6) {
+                showError(['Password minimal 6 karakter!']);
                 return;
             }
 
             // Simulate login process
-            alert('Login functionality would be handled by the backend. Email: ' + email);
+            showSuccess('Login berhasil! Selamat datang, ' + username);
         }
 
         function isValidEmail(email) {
@@ -155,6 +144,25 @@
             setTimeout(() => {
                 errorContainer.classList.add('hidden');
             }, 5000);
+        }
+
+        function showSuccess(message) {
+            // Create success notification
+            const successDiv = document.createElement('div');
+            successDiv.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+            successDiv.innerHTML = `
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle mr-2"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+
+            document.body.appendChild(successDiv);
+
+            // Auto remove after 3 seconds
+            setTimeout(() => {
+                successDiv.remove();
+            }, 3000);
         }
     </script>
 </body>
