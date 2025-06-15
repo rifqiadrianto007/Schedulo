@@ -53,48 +53,53 @@
                 Selamat Datang Di Schedulo!
             </h2>
 
-            <!-- Error Messages (Hidden by default, would be shown by backend) -->
-            <div id="error-container" class="w-full mb-4 hidden">
-                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
-                    <ul class="list-disc pl-5" id="error-list">
-                        <!-- Error messages would be populated here -->
-                    </ul>
+            <!-- Error Messages -->
+            @if ($errors->any())
+                <div id="error-container" class="w-full mb-4">
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+                        <ul id="error-list" class="list-disc pl-5">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                 </div>
-            </div>
+            @endif
 
-            <!-- Regis Form -->
-            <form action="{{ route('register.proses') }}" method="POST" class="w-full max-w-md space-y-4">
+            <!-- Register Form -->
+            <form action="{{ route('register.proses') }}" method="POST" class="w-full space-y-4">
                 @csrf
                 <div>
-                    <input name="nama"
-                        class="w-full rounded-md border border-gray-600 px-4 py-3 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#1e5ebd]"
+                    <input name="nama" id="nama"
+                        class="w-full rounded-md border border-gray-600 px-4 py-3 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#1e5ebd] transition-colors"
                         placeholder="Nama Lengkap" type="text" required />
                 </div>
 
                 <div>
-                    <input name="nomor_induk"
-                        class="w-full rounded-md border border-gray-600 px-4 py-3 pr-12 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#1e5ebd]"
+                    <input name="nomor_induk" id="nomor_induk"
+                        class="w-full rounded-md border border-gray-600 px-4 py-3 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#1e5ebd] transition-colors"
                         placeholder="Nomor Induk" type="text" required />
                 </div>
 
-                <div>
-                    <input name="password"
-                        class="w-full rounded-md border border-gray-600 px-4 py-3 pr-12 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#1e5ebd]"
+                <div class="relative">
+                    <input name="password" id="password"
+                        class="w-full rounded-md border border-gray-600 px-4 py-3 pr-12 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#1e5ebd] transition-colors"
                         placeholder="Password" type="password" required />
-                    <span aria-label="Toggle password visibility"
-                        class="absolute inset-y-0 right-3 flex items-center text-gray-400 cursor-pointer">
+                    <span aria-label="Toggle password visibility" tabindex="0"
+                        class="absolute inset-y-0 right-3 flex items-center text-gray-400 cursor-pointer hover:text-gray-600 transition-colors">
                         <i class="fas fa-eye-slash fa-lg"></i>
                     </span>
                 </div>
+
                 <p class="text-center text-xs text-gray-700">
                     Sudah punya akun?
-                    <a href="{{ route('login') }}" class="text-[#5a6dfd] font-semibold">
+                    <a href="{{ route('login') }}" class="text-[#5a6dfd] font-semibold hover:underline">
                         Login!
                     </a>
                 </p>
 
                 <button type="submit"
-                    class="w-full bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-medium rounded-md py-3 text-base transition-colors">
+                    class="w-full bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-medium rounded-md py-3 text-base transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
                     Daftar
                 </button>
             </form>
@@ -105,53 +110,187 @@
     <x-footer />
 
     <script>
-        function togglePassword() {
-            const passwordInput = document.getElementById('password');
-            const passwordIcon = document.getElementById('password-icon');
+        // Schedulo Authentication JavaScript - Optimized for both login and register
+        document.addEventListener('DOMContentLoaded', function() {
+            initializePasswordToggle();
+            initializeFormValidation();
+            autoHideErrors();
+        });
 
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                passwordIcon.className = 'fas fa-eye';
+        function initializePasswordToggle() {
+            const passwordInputs = document.querySelectorAll('input[type="password"]');
+
+            passwordInputs.forEach(input => {
+                const toggleSpan = input.parentElement.querySelector(
+                    'span[aria-label="Toggle password visibility"]');
+                if (toggleSpan) {
+                    const icon = toggleSpan.querySelector('i');
+
+                    // Click event
+                    toggleSpan.addEventListener('click', function() {
+                        togglePassword(input, icon);
+                    });
+
+                    // Keyboard support
+                    toggleSpan.addEventListener('keypress', function(e) {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            togglePassword(input, icon);
+                        }
+                    });
+                }
+            });
+        }
+
+        function togglePassword(input, icon) {
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.className = 'fas fa-eye fa-lg';
             } else {
-                passwordInput.type = 'password';
-                passwordIcon.className = 'fas fa-eye-slash';
+                input.type = 'password';
+                icon.className = 'fas fa-eye-slash fa-lg';
             }
         }
 
-        function handleLogin(event) {
-            event.preventDefault();
+        function initializeFormValidation() {
+            const form = document.querySelector('form');
+            if (!form) return;
 
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
+            form.addEventListener('submit', function(event) {
+                const errors = validateForm(form);
 
-            // Basic validation
-            if (!username || !password) {
-                showError(['Username dan password harus diisi!']);
-                return;
-            }
+                if (errors.length > 0) {
+                    event.preventDefault();
+                    showError(errors);
+                    return false;
+                }
 
-            if (username.length < 3) {
-                showError(['Username minimal 3 karakter!']);
-                return;
-            }
+                // Show loading state
+                const submitBtn = form.querySelector('button[type="submit"]');
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Memproses...';
+            });
 
-            if (password.length < 6) {
-                showError(['Password minimal 6 karakter!']);
-                return;
-            }
+            // Real-time validation
+            const inputs = form.querySelectorAll('input[required]');
+            inputs.forEach(input => {
+                input.addEventListener('blur', function() {
+                    validateSingleField(input);
+                });
 
-            // Simulate login process
-            showSuccess('Login berhasil! Selamat datang, ' + username);
+                input.addEventListener('input', function() {
+                    clearFieldError(input);
+                });
+            });
         }
 
-        function isValidEmail(email) {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegex.test(email);
+        function validateForm(form) {
+            const errors = [];
+            const nama = form.querySelector('input[name="nama"]').value.trim();
+            const nomorInduk = form.querySelector('input[name="nomor_induk"]').value.trim();
+            const password = form.querySelector('input[name="password"]').value;
+
+            // Validate nama
+            if (!nama) {
+                errors.push('Nama lengkap harus diisi!');
+            } else if (nama.length < 2) {
+                errors.push('Nama minimal 2 karakter!');
+            } else if (!/^[a-zA-Z\s]+$/.test(nama)) {
+                errors.push('Nama hanya boleh berisi huruf dan spasi!');
+            }
+
+            // Validate nomor induk
+            if (!nomorInduk) {
+                errors.push('Nomor induk harus diisi!');
+            } else if (nomorInduk.length < 3) {
+                errors.push('Nomor induk minimal 3 karakter!');
+            } else if (!/^[0-9]+$/.test(nomorInduk)) {
+                errors.push('Nomor induk hanya boleh berisi angka!');
+            }
+
+            // Validate password
+            if (!password) {
+                errors.push('Password harus diisi!');
+            } else if (password.length < 6) {
+                errors.push('Password minimal 6 karakter!');
+            } else if (!/(?=.*[a-z])(?=.*[A-Z])|(?=.*[a-z])(?=.*[0-9])|(?=.*[A-Z])(?=.*[0-9])/.test(password)) {
+                errors.push('Password harus mengandung kombinasi huruf besar, huruf kecil, atau angka!');
+            }
+
+            return errors;
+        }
+
+        function validateSingleField(input) {
+            const errors = [];
+            const value = input.value.trim();
+            const fieldName = input.name;
+
+            switch (fieldName) {
+                case 'nama':
+                    if (!value) {
+                        errors.push('Nama lengkap harus diisi!');
+                    } else if (value.length < 2) {
+                        errors.push('Nama minimal 2 karakter!');
+                    } else if (!/^[a-zA-Z\s]+$/.test(value)) {
+                        errors.push('Nama hanya boleh berisi huruf dan spasi!');
+                    }
+                    break;
+
+                case 'nomor_induk':
+                    if (!value) {
+                        errors.push('Nomor induk harus diisi!');
+                    } else if (value.length < 3) {
+                        errors.push('Nomor induk minimal 3 karakter!');
+                    } else if (!/^[0-9]+$/.test(value)) {
+                        errors.push('Nomor induk hanya boleh berisi angka!');
+                    }
+                    break;
+
+                case 'password':
+                    if (!input.value) {
+                        errors.push('Password harus diisi!');
+                    } else if (input.value.length < 6) {
+                        errors.push('Password minimal 6 karakter!');
+                    }
+                    break;
+            }
+
+            if (errors.length > 0) {
+                showFieldError(input, errors[0]);
+            } else {
+                clearFieldError(input);
+            }
+        }
+
+        function showFieldError(input, message) {
+            clearFieldError(input);
+
+            input.classList.add('border-red-500', 'bg-red-50');
+
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'text-red-600 text-xs mt-1 field-error';
+            errorDiv.textContent = message;
+
+            input.parentElement.appendChild(errorDiv);
+        }
+
+        function clearFieldError(input) {
+            input.classList.remove('border-red-500', 'bg-red-50');
+
+            const existingError = input.parentElement.querySelector('.field-error');
+            if (existingError) {
+                existingError.remove();
+            }
         }
 
         function showError(errors) {
-            const errorContainer = document.getElementById('error-container');
-            const errorList = document.getElementById('error-list');
+            let errorContainer = document.getElementById('error-container');
+            let errorList = document.getElementById('error-list');
+
+            if (!errorContainer) {
+                createErrorContainer(errors);
+                return;
+            }
 
             errorList.innerHTML = '';
             errors.forEach(error => {
@@ -161,30 +300,87 @@
             });
 
             errorContainer.classList.remove('hidden');
+            errorContainer.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+            });
 
-            // Auto hide after 5 seconds
             setTimeout(() => {
                 errorContainer.classList.add('hidden');
-            }, 5000);
+            }, 8000);
+        }
+
+        function createErrorContainer(errors) {
+            const form = document.querySelector('form');
+            if (!form) return;
+
+            const errorContainer = document.createElement('div');
+            errorContainer.id = 'error-container';
+            errorContainer.className = 'w-full mb-4';
+
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded';
+
+            const errorList = document.createElement('ul');
+            errorList.id = 'error-list';
+            errorList.className = 'list-disc pl-5';
+
+            errors.forEach(error => {
+                const li = document.createElement('li');
+                li.textContent = error;
+                errorList.appendChild(li);
+            });
+
+            errorDiv.appendChild(errorList);
+            errorContainer.appendChild(errorDiv);
+
+            form.parentElement.insertBefore(errorContainer, form);
+
+            setTimeout(() => {
+                errorContainer.remove();
+            }, 8000);
+        }
+
+        function autoHideErrors() {
+            const errorContainer = document.getElementById('error-container');
+            if (errorContainer && !errorContainer.classList.contains('hidden')) {
+                setTimeout(() => {
+                    errorContainer.classList.add('hidden');
+                }, 10000);
+            }
         }
 
         function showSuccess(message) {
-            // Create success notification
+            const existingSuccess = document.querySelectorAll('.success-notification');
+            existingSuccess.forEach(el => el.remove());
+
             const successDiv = document.createElement('div');
-            successDiv.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+            successDiv.className =
+                'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 success-notification transform translate-x-full transition-transform duration-300';
             successDiv.innerHTML = `
                 <div class="flex items-center">
                     <i class="fas fa-check-circle mr-2"></i>
                     <span>${message}</span>
+                    <button class="ml-4 text-white hover:text-gray-200" onclick="this.parentElement.parentElement.remove()">
+                        <i class="fas fa-times"></i>
+                    </button>
                 </div>
             `;
 
             document.body.appendChild(successDiv);
 
-            // Auto remove after 3 seconds
             setTimeout(() => {
-                successDiv.remove();
-            }, 3000);
+                successDiv.classList.remove('translate-x-full');
+            }, 100);
+
+            setTimeout(() => {
+                successDiv.classList.add('translate-x-full');
+                setTimeout(() => {
+                    if (successDiv.parentElement) {
+                        successDiv.remove();
+                    }
+                }, 300);
+            }, 5000);
         }
     </script>
 </body>
