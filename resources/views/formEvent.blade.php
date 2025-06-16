@@ -185,6 +185,6 @@
     </main>
 @endsection
 
-@section('scripts')
+@push('scripts')
     <script src="{{ asset('js/form-event.js') }}"></script>
-@endsection
+@endpush
