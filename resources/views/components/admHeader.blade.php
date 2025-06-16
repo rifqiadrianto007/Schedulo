@@ -1,4 +1,4 @@
-<header class="bg-blue-600 text-white px-6 py-4 flex justify-between items-center">
+<header class="bg-blue-600 text-white px-6 py-4 flex justify-between items-center shadow-lg">
     <div class="flex items-center">
         <img src="{{ asset('img/logo.png') }}" alt="Schedulo Logo" class="h-8 w-auto">
         <div class="ml-2 w-6 h-6 bg-white rounded-full flex items-center justify-center">

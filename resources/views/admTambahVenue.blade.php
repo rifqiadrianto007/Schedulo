@@ -1,23 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.admin', ['bodyClass' => 'font-sans bg-gray-50 min-h-screen flex flex-col'])
 
 @section('content')
 <body class="bg-[#e8eef2] min-h-screen flex flex-col">
-    <header class="bg-[#1e5ebd] p-4 flex items-center">
-        <img alt="Schedulo logo" class="mr-2" height="40"
-            src="https://storage.googleapis.com/a1aa/image/b0117f03-b472-499c-a2db-a3952f5e027e.jpg" width="40" />
-        <h1 class="text-white font-extrabold text-xl underline decoration-white decoration-4">
-            Schedulo
-            <span class="inline-block align-middle">
-                <svg class="inline-block" fill="none" height="24" stroke="white" stroke-linecap="round"
-                    stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <polyline points="12 6 12 12 16 14"></polyline>
-                </svg>
-            </span>
-            <span class="sr-only">o</span>
-        </h1>
-    </header>
 
     <main class="flex-grow flex flex-col justify-center items-center px-4">
         <h2 class="text-blue-700 font-bold text-3xl mb-8">Tambah Venue</h2>
