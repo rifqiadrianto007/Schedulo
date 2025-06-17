@@ -17,14 +17,14 @@
     <!-- Header -->
     <x-admHeader />
 
-    <div class="flex min-h-screen">
+    <div class="flex mh-screen overflow-hidden">
         <!-- Sidebar -->
         <x-admSidebar />
 
         <!-- Main Content -->
-        <main class="flex-1 p-6">
+        <main class="flex-1 p-6 overflow-y-auto h-full">
             <div class="bg-white rounded-lg p-6 shadow-sm">
-                <div class="text-center py-20">
+                <div class="text-center py-10">
                     <h2 class="text-4xl font-bold text-blue-600 mb-4">Selamat Datang di Schedulio</h2>
                     <p class="text-xl text-gray-600 mb-8">Sistem Manajemen Event dan Venue</p>
 

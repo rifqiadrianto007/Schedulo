@@ -1,4 +1,4 @@
-<aside class="w-48 bg-[#B0BEC5] p-4 flex flex-col min-h-screen shadow-lg">
+<aside class="w-48 bg-[#B0BEC5] p-4 flex flex-col h-screen justify-between shadow-lg">
     <!-- Navigation Menu -->
     <nav class="space-y-2 flex-grow">
         <a href="{{ route('admDashboard') }}"
