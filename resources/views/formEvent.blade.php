@@ -6,13 +6,14 @@
         <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6">
             <h1 class="text-2xl font-bold text-gray-800 mb-6 text-center">Form Pengajuan Event</h1>
 
-            <form class="space-y-6">
+            <form action="{{ route('event.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
                 <!-- Nama Ketua Pelaksana -->
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">
                         Nama Ketua Pelaksana :
                     </label>
-                    <input type="text"
+                    <input type="text" name="nama_pelaksana"
                         class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50">
                 </div>
 
@@ -21,7 +22,7 @@
                     <label class="block text-sm font-medium text-gray-700 mb-2">
                         NIM/NIP :
                     </label>
-                    <input type="text"
+                    <input type="text" name="nim_nip"
                         class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50">
                 </div>
 
@@ -30,7 +31,7 @@
                     <label class="block text-sm font-medium text-gray-700 mb-2">
                         Nama Kegiatan :
                     </label>
-                    <input type="text"
+                    <input type="text" name="nama_kegiatan"
                         class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50">
                 </div>
 
@@ -40,9 +41,9 @@
                         <label class="block text-sm font-medium text-gray-700 mb-2">
                             Jenis Kegiatan :
                         </label>
-                        <select
+                        <select name="jenis_kegiatan"
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white">
-                            <option value="">Seminar</option>
+                            <option value="Seminar">Seminar</option>
                             <option value="workshop">Workshop</option>
                             <option value="konferensi">Konferensi</option>
                             <option value="pelatihan">Pelatihan</option>
@@ -52,7 +53,7 @@
                         <label class="block text-sm font-medium text-gray-700 mb-2">
                             Narasumber/Pemateri :
                         </label>
-                        <input type="text"
+                        <input type="text" name="narasumber_pemateri"
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50">
                     </div>
                 </div>
@@ -63,7 +64,7 @@
                         Tanggal Dilaksanakan :
                     </label>
                     <div class="relative">
-                        <input type="date" id="tanggal-dilaksanakan"
+                        <input type="date" id="tanggal-dilaksanakan" name="tanggal_pelaksanaan"
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white">
                         <i class="fas fa-calendar-alt absolute right-3 top-3 text-gray-400 pointer-events-none"></i>
                     </div>
@@ -75,19 +76,19 @@
                         <label class="block text-sm font-medium text-gray-700 mb-2">
                             Tempat Kegiatan :
                         </label>
-                        <select
+                        <select name="tempat_kegiatan"
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white">
-                            <option value="">Ruang Kuliah B1 & B2</option>
-                            <option value="aula">Aula Utama</option>
-                            <option value="lab">Laboratorium</option>
-                            <option value="online">Online</option>
+                            <option value="Ruang Kuliah B1 & B2">Ruang Kuliah B1 & B2</option>
+                            <option value="Aula Utama">Aula Utama</option>
+                            <option value="Laboratorium">Laboratorium</option>
+                            <option value="Online">Online</option>
                         </select>
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">
                             Link Zoom :
                         </label>
-                        <input type="url"
+                        <input type="url" name="link_zoom"
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50">
                     </div>
                 </div>
@@ -97,7 +98,7 @@
                     <label class="block text-sm font-medium text-gray-700 mb-2">
                         Biaya Pendaftaran :
                     </label>
-                    <input type="text" placeholder="Kosongi Jika Gratis"
+                    <input type="text" placeholder="Kosongi Jika Gratis" name="biaya_pendaftaran"
                         class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-100 text-gray-600 placeholder-gray-400">
                 </div>
 
@@ -108,7 +109,7 @@
                             Tenggat Pendaftaran
                         </label>
                         <div class="relative">
-                            <input type="date" id="tenggat-pendaftaran"
+                            <input type="date" id="tenggat-pendaftaran" name="tenggat_pendaftaran"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white">
                             <i class="fas fa-calendar-alt absolute right-3 top-3 text-gray-400 pointer-events-none"></i>
                         </div>
@@ -117,7 +118,7 @@
                         <label class="block text-sm font-medium text-gray-700 mb-2">
                             Link Form :
                         </label>
-                        <input type="url" placeholder="Isi Link Form"
+                        <input type="url" placeholder="Isi Link Form" name="link_form"
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50 placeholder-gray-400">
                     </div>
                 </div>
@@ -127,7 +128,7 @@
                     <label class="block text-sm font-medium text-gray-700 mb-2">
                         Kuota :
                     </label>
-                    <input type="number"
+                    <input type="number" name="kuota"
                         class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50">
                 </div>
 
@@ -136,24 +137,22 @@
                     <label class="block text-sm font-medium text-gray-700 mb-2">
                         Deskripsi Kegiatan :
                     </label>
-                    <textarea rows="4"
+                    <textarea rows="4" name="deskripsi"
                         class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50 resize-none"></textarea>
                 </div>
 
                 <!-- Poster Kegiatan -->
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">
-                        Poster Kegiatan :
-                    </label>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Poster Kegiatan :</label>
                     <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-400 transition-colors cursor-pointer"
                         onclick="document.getElementById('poster-upload').click()">
                         <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-3"></i>
                         <p class="text-gray-500 mb-2">Pilih file</p>
-                        <input type="file" accept="image/*" class="hidden" id="poster-upload">
-                        <span
-                            class="inline-block px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors text-sm">
+                        <span class="inline-block px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors text-sm">
                             Browse Files
                         </span>
+                        <p id="file-name" class="text-sm text-gray-700 mt-2">No file chosen</p>
+                        <input type="file" accept="image/*" id="poster-upload" name="poster" class="hidden" onchange="previewFileName(event)">
                         <p class="text-xs text-gray-400 mt-2">Format: JPG, PNG, GIF (Max: 5MB)</p>
                     </div>
                 </div>
@@ -168,7 +167,7 @@
                             class="inline-flex items-center px-3 py-2 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
                             +62
                         </span>
-                        <input type="tel" placeholder="8123456789"
+                        <input type="tel" placeholder="8123456789" name="contact"
                             class="flex-1 px-3 py-2 border border-gray-300 rounded-r-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400">
                     </div>
                 </div>
@@ -181,6 +180,16 @@
                     </button>
                 </div>
             </form>
+            <script>
+                function previewFileName(event) {
+                    const file = event.target.files[0];
+                    if (file) {
+                        document.getElementById('file-name').textContent = "File dipilih: " + file.name;
+                    } else {
+                        document.getElementById('file-name').textContent = "Tidak ada file dipilih.";
+                    }
+                }
+            </script>
         </div>
     </main>
 @endsection

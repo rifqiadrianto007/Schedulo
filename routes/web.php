@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\VenueController;
+use App\Http\Controllers\EventController;
 use App\Http\Middleware\auth;
 
 Route::get('/', function () {
@@ -39,9 +40,19 @@ Route::get('/admVenue', [VenueController::class, 'index'])->name('admVenue')->mi
 
 Route::delete('admVenue/delete/{id}', [VenueController::class, 'destroy'])->name('admVenue.delete')->middleware('auth', 'admin');
 
-Route::get('event', function () {
-    return view('event');
-})->name('event');
+Route::get('/event', [EventController::class, 'index'])->name('event');
+
+Route::get('event', [EventController::class, 'showAdmEvent'])->name('event');
+
+Route::get('event/tambah', [EventController::class, 'create'])->name('event.create')->middleware('auth');
+
+Route::post('event/tambah', [EventController::class, 'store'])->name('event.store')->middleware('auth');
+
+Route::get('/event/{id}/edit', [EventController::class, 'edit'])->name('event.edit')->middleware('auth');
+
+Route::post('/event/{id}/update', [EventController::class, 'update'])->name('event.update')->middleware('auth');
+
+Route::get('/eventStatus', [EventController::class, 'showEvent'])->name('eventStatus');
 
 Route::get('admDashboard', function () {
     return view('admDashboard');

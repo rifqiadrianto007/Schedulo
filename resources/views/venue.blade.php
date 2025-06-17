@@ -169,5 +169,5 @@
 </script>
 
 {{-- @push('scripts')
-    <script src="{{ asset('js/venue.js') }}"></script>
+    <script src="{{ asset('resources\js\venue.js') }}"></script>
 @endpush --}}
