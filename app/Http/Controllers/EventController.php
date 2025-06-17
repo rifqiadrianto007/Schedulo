@@ -31,7 +31,7 @@ class EventController extends Controller {
     }
 
     public function store(Request $request) {
-        $request->validate([
+        $validated = $request->validate([
             'nama_pelaksana' => 'required|string|max:255',
             'nim_nip' => 'required|string|max:50',
             'nama_kegiatan' => 'required|string|max:255',
