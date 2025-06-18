@@ -1,6 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
+@if ($errors->any())
+    <div class="bg-red-100 text-red-700 p-4 rounded mb-4">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>- {{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
     <!-- Main Content -->
     <main class="container mx-auto px-4 py-8">
         <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6">
@@ -44,9 +54,9 @@
                         <select name="jenis_kegiatan"
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white">
                             <option value="Seminar">Seminar</option>
-                            <option value="workshop">Workshop</option>
-                            <option value="konferensi">Konferensi</option>
-                            <option value="pelatihan">Pelatihan</option>
+                            <option value="Workshop">Workshop</option>
+                            <option value="Konferensi">Konferensi</option>
+                            <option value="Pelatihan">Pelatihan</option>
                         </select>
                     </div>
                     <div>
@@ -78,10 +88,12 @@
                         </label>
                         <select name="tempat_kegiatan"
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white">
-                            <option value="Ruang Kuliah B1 & B2">Ruang Kuliah B1 & B2</option>
-                            <option value="Aula Utama">Aula Utama</option>
-                            <option value="Laboratorium">Laboratorium</option>
-                            <option value="Online">Online</option>
+                            <option disabled selected value="">Pilih Tempat Kegiatan</option>
+                            @foreach ($venues as $venue)
+                                <option value="{{ $venue->nama_tempat }}" {{ old('tempat_kegiatan') == $venue->nama_tempat ? 'selected' : '' }}>
+                                    {{ $venue->nama_tempat }}
+                                </option>
+                            @endforeach
                         </select>
                     </div>
                     <div>

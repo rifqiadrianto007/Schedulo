@@ -17,8 +17,18 @@
             <div class="bg-white border border-gray-300 rounded-lg shadow-sm p-5 flex items-center justify-between mt-4">
                 <div>
                     <h3 class="text-lg font-semibold text-gray-800">{{ $event->nama_kegiatan }}</h3>
-                    <span class="inline-block bg-red-600 text-white text-xs px-2 py-1 rounded mt-2">
-                        Belum Disetujui
+                    @php
+                        $status = $event->status;
+                        $color = match($status) {
+                            'Disetujui' => 'bg-green-500',
+                            'Ditolak' => 'bg-red-600',
+                            'Revisi' => 'bg-yellow-400 text-black',
+                            default => 'bg-gray-400',
+                        };
+                    @endphp
+
+                    <span class="inline-block {{ $color }} text-white text-xs px-2 py-1 rounded mt-2">
+                        {{ $status ?? 'Belum Disetujui' }}
                     </span>
                 </div>
 

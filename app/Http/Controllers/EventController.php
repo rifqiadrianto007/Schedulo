@@ -6,8 +6,37 @@ use Illuminate\Http\Request;
 use App\Models\Event;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
+use App\Models\Venue;
 
 class EventController extends Controller {
+
+    public function showPendingEvents()
+{
+    $events = Event::whereIn('status', ['Belum Disetujui', 'Revisi'])->get();
+    return view('admPengajuanEvent', compact('events'));
+}
+    public function show($id)
+{
+    $event = Event::findOrFail($id);
+    return view('admFormDataEvent', compact('event'));
+}
+
+public function updateStatus(Request $request, $id)
+{
+    $event = Event::findOrFail($id);
+
+    $event->status = $request->input('status');
+
+    if ($request->input('status') === 'Revisi') {
+        $event->catatan_admin = $request->input('catatan_admin');
+    }
+
+    $event->save();
+
+    return redirect()->route('admEvent')->with('success', 'Status event berhasil diperbarui.');
+}
+
+
     public function showAdmEvent() {
         $events = Event::all()->map(function($event) {
             $event->tanggal_formatted = date('d-m-Y', strtotime($event->tanggal_pelaksanaan));
@@ -27,8 +56,9 @@ class EventController extends Controller {
     }
 
     public function create() {
-        return view('formEvent');
-    }
+    $venues = Venue::all();
+    return view('formEvent', compact('venues'));
+}
 
     public function store(Request $request) {
         $validated = $request->validate([
@@ -36,9 +66,9 @@ class EventController extends Controller {
             'nim_nip' => 'required|string|max:50',
             'nama_kegiatan' => 'required|string|max:255',
             'jenis_kegiatan' => 'required|in:Seminar,Workshop,Konferensi,Pelatihan',
-            'narasumber_pemateri' => 'required|string|max:50',
+            'narasumber_pemateri' => 'required|string|max:510',
             'tanggal_pelaksanaan' => 'required|date',
-            'tempat_kegiatan' => 'required|in:Ruang Kuliah B1 & B2,Aula Utama,Laboratorium,Online',
+            'tempat_kegiatan' => 'required|exists:venues,nama_tempat',
             'link_zoom' => 'nullable|url',
             'biaya_pendaftaran' => 'nullable|numeric',
             'tenggat_pendaftaran' => 'required|date',
@@ -67,6 +97,7 @@ class EventController extends Controller {
             'deskripsi' => $request->deskripsi,
             'poster' => $path,
             'contact' => $request->contact,
+            'status' => 'Belum Disetujui',
         ]);
 
         return redirect()->route('eventStatus')->with('success', 'Berhasil mengajukan event');
@@ -94,6 +125,8 @@ class EventController extends Controller {
         $event->kuota = $request->kuota;
         $event->deskripsi = $request->deskripsi;
         $event->contact = $request->contact;
+        $event->status = 'Belum Disetujui';
+        $event->catatan_admin = null;
 
         if ($request->hasFile('poster')) {
             $path = $request->file('poster')->store('posters', 'public');

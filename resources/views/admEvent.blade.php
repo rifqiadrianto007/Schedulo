@@ -27,10 +27,10 @@
                 <!-- Header Section -->
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-3xl font-bold text-blue-600">Event</h2>
-                    <button
-                        class="bg-yellow-400 hover:bg-yellow-500 text-black font-medium px-6 py-2 rounded-lg transition-colors">
-                        Event Diajukan
-                    </button>
+                    <a href="{{ route('admPengajuanEvent') }}"
+                    class="bg-yellow-400 hover:bg-yellow-500 text-black font-medium px-6 py-2 rounded-lg transition-colors">
+                    Event Diajukan
+                    </a>
                 </div>
 
                 <!-- Events List -->

@@ -62,6 +62,11 @@ Route::get('admEvent', function () {
     return view('admEvent');
 })->name('admEvent')->middleware('auth', 'admin');
 
-Route::get('/form-event', function () {
-    return view('formEvent');
-})->name('form.event')->middleware('auth');
+Route::get('/form-event', [EventController::class, 'create'])->name('form.event')->middleware('auth');
+
+Route::get('/admEvent/pengajuan', [EventController::class, 'showPendingEvents'])->name('admPengajuanEvent')->middleware('auth', 'admin');
+
+Route::get('/admFormDataEvent/{id}', [EventController::class, 'show'])->name('form.dataEvent')->middleware('auth', 'admin');
+
+Route::post('/admFormDataEvent/{id}/updateStatus', [EventController::class, 'updateStatus'])->name('event.updateStatus')->middleware('auth', 'admin');
+

@@ -101,5 +101,11 @@
             <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700">Simpan Perubahan</button>
         </div>
     </form>
+    @if ($event->catatan_admin)
+        <div class="bg-yellow-100 border border-yellow-400 text-yellow-800 px-4 py-3 rounded mb-6">
+            <strong>Catatan dari Admin:</strong><br>
+            {{ $event->catatan_admin }}
+        </div>
+    @endif
 </div>
 @endsection

@@ -27,5 +27,7 @@ class Event extends Model
         'deskripsi',
         'poster',
         'contact',
+        'status',
+        'catatan_admin',
     ];
 }
