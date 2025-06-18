@@ -24,77 +24,48 @@
         <!-- Main Content -->
         <main class="flex-1 p-6">
             <div class="bg-white rounded-lg p-6 shadow-sm">
-                <!-- Header Section -->
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-3xl font-bold text-blue-600">Event</h2>
                     <a href="{{ route('admPengajuanEvent') }}"
-                    class="bg-yellow-400 hover:bg-yellow-500 text-black font-medium px-6 py-2 rounded-lg transition-colors">
-                    Event Diajukan
+                        class="bg-yellow-400 hover:bg-yellow-500 text-black font-medium px-6 py-2 rounded-lg transition">
+                        Event Diajukan
                     </a>
                 </div>
 
-                <!-- Events List -->
-                <div class="space-y-4">
-                    <!-- Event 1: JAWARA CODE -->
-                    <div class="bg-gray-200 rounded-lg p-4 flex justify-between items-center">
-                        <div class="flex-1">
-                            <h3 class="text-lg font-semibold text-gray-800">JAWARA CODE : Pembinaan CPC</h3>
-                        </div>
-                        <div class="flex items-center space-x-3">
-                            <span class="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium">
-                                16 Des - 17 Des
-                            </span>
-                            <button
-                                class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium transition-colors">
-                                Detail
-                            </button>
-                            <button
-                                class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition-colors">
-                                Hapus
-                            </button>
-                        </div>
-                    </div>
+                @if(isset($events) && $events->count())
+                    <div class="space-y-4">
+                        @foreach($events as $event)
+                            <div class="bg-gray-100 rounded-lg p-4 flex justify-between items-center shadow-sm">
+                                <div>
+                                    <h3 class="text-lg font-semibold text-gray-800">{{ $event->nama_kegiatan }}</h3>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <span class="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium text-sm">
+                                        {{ \Carbon\Carbon::parse($event->tanggal_mulai)->format('d M') }} -
+                                        {{ \Carbon\Carbon::parse($event->tanggal_selesai)->format('d M') }}
+                                    </span>
 
-                    <!-- Event 2: P2MW -->
-                    <div class="bg-gray-200 rounded-lg p-4 flex justify-between items-center">
-                        <div class="flex-1">
-                            <h3 class="text-lg font-semibold text-gray-800">Pembinaan Mahasiswa Wirausaha (P2MW)</h3>
-                        </div>
-                        <div class="flex items-center space-x-3">
-                            <span class="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium">
-                                24 Jan - 24 Jan
-                            </span>
-                            <button
-                                class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium transition-colors">
-                                Detail
-                            </button>
-                            <button
-                                class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition-colors">
-                                Hapus
-                            </button>
-                        </div>
-                    </div>
+                                    <a href="{{ route('event.detailAdm', $event->id) }}"
+                                        class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm transition">
+                                        Detail
+                                    </a>
 
-                    <!-- Event 3: Awarding Night FASILKOM -->
-                    <div class="bg-gray-200 rounded-lg p-4 flex justify-between items-center">
-                        <div class="flex-1">
-                            <h3 class="text-lg font-semibold text-gray-800">Awarding Night FASILKOM</h3>
-                        </div>
-                        <div class="flex items-center space-x-3">
-                            <span class="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium">
-                                23 Mei - 24 Mei
-                            </span>
-                            <button
-                                class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium transition-colors">
-                                Detail
-                            </button>
-                            <button
-                                class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition-colors">
-                                Hapus
-                            </button>
-                        </div>
+                                    <form action="{{ route('admEventDelete', $event->id) }}" method="POST"
+                                        onsubmit="return confirm('Yakin hapus event ini?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button
+                                            class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm transition">
+                                            Hapus
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
-                </div>
+                @else
+                    <p class="text-gray-500">Belum ada event yang disetujui.</p>
+                @endif
             </div>
         </main>
     </div>

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\VenueController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\AdminController;
 use App\Http\Middleware\auth;
 
 Route::get('/', function () {
@@ -58,6 +59,12 @@ Route::get('admDashboard', function () {
     return view('admDashboard');
 })->name('admDashboard')->middleware('auth', 'admin');
 
+Route::get('admDashboard', [AdminController::class, 'dashboard'])->name('admDashboard')->middleware('auth', 'admin');
+
+Route::delete('/admEvent/{id}', [AdminController::class, 'destroy'])->name('admEventDelete')->middleware('auth', 'admin');
+
+Route::get('/admin/event', [EventController::class, 'eventList'])->name('eventList')->middleware('auth', 'admin');
+
 Route::get('admEvent', function () {
     return view('admEvent');
 })->name('admEvent')->middleware('auth', 'admin');
@@ -69,4 +76,6 @@ Route::get('/admEvent/pengajuan', [EventController::class, 'showPendingEvents'])
 Route::get('/admFormDataEvent/{id}', [EventController::class, 'show'])->name('form.dataEvent')->middleware('auth', 'admin');
 
 Route::post('/admFormDataEvent/{id}/updateStatus', [EventController::class, 'updateStatus'])->name('event.updateStatus')->middleware('auth', 'admin');
+
+Route::get('/eventDetailAdm/{id}', [EventController::class, 'showDetail'])->name('event.detailAdm')->middleware('auth', 'admin');
 

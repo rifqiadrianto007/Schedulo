@@ -9,33 +9,32 @@ use Illuminate\Support\Facades\Log;
 use App\Models\Venue;
 
 class EventController extends Controller {
-
     public function showPendingEvents()
-{
-    $events = Event::whereIn('status', ['Belum Disetujui', 'Revisi'])->get();
-    return view('admPengajuanEvent', compact('events'));
-}
-    public function show($id)
-{
-    $event = Event::findOrFail($id);
-    return view('admFormDataEvent', compact('event'));
-}
-
-public function updateStatus(Request $request, $id)
-{
-    $event = Event::findOrFail($id);
-
-    $event->status = $request->input('status');
-
-    if ($request->input('status') === 'Revisi') {
-        $event->catatan_admin = $request->input('catatan_admin');
+    {
+        $events = Event::whereIn('status', ['Belum Disetujui', 'Revisi'])->get();
+        return view('admPengajuanEvent', compact('events'));
     }
 
-    $event->save();
+    public function show($id)
+    {
+        $event = Event::findOrFail($id);
+        return view('admFormDataEvent', compact('event'));
+    }
 
-    return redirect()->route('admEvent')->with('success', 'Status event berhasil diperbarui.');
-}
+    public function updateStatus(Request $request, $id)
+    {
+        $event = Event::findOrFail($id);
 
+        $event->status = $request->input('status');
+
+        if ($request->input('status') === 'Revisi') {
+            $event->catatan_admin = $request->input('catatan_admin');
+        }
+
+        $event->save();
+
+        return redirect()->route('admEvent')->with('success', 'Status event berhasil diperbarui.');
+    }
 
     public function showAdmEvent() {
         $events = Event::all()->map(function($event) {
@@ -56,9 +55,9 @@ public function updateStatus(Request $request, $id)
     }
 
     public function create() {
-    $venues = Venue::all();
-    return view('formEvent', compact('venues'));
-}
+        $venues = Venue::all();
+        return view('formEvent', compact('venues'));
+    }
 
     public function store(Request $request) {
         $validated = $request->validate([
@@ -136,5 +135,18 @@ public function updateStatus(Request $request, $id)
         $event->save();
 
         return redirect()->route('eventStatus')->with('success', 'Data berhasil diperbarui.');
+    }
+
+    public function eventList()
+    {
+        $events = Event::where('status', 'Disetujui')->get();
+
+        return view('admEvent', compact('events'));
+    }
+
+    public function showDetail($id)
+    {
+        $event = Event::findOrFail($id);
+        return view('eventDetailAdm', compact('event'));
     }
 }

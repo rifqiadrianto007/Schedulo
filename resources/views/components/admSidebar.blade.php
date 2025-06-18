@@ -5,7 +5,7 @@
             class="block w-full px-4 py-3 text-white font-medium rounded-lg transition-colors {{ request()->routeIs('admDashboard') ? 'bg-blue-600' : 'bg-blue-500 hover:bg-blue-600' }}">
             Beranda
         </a>
-        <a href="{{ route('admEvent') }}"
+        <a href="{{ route('eventList') }}"
             class="block w-full px-4 py-3 text-white font-medium rounded-lg transition-colors {{ request()->routeIs('admEvent') ? 'bg-blue-600' : 'bg-blue-500 hover:bg-blue-600' }}">
             Event
         </a>
