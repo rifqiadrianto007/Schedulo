@@ -1,6 +1,6 @@
-<aside class="w-48 bg-[#B0BEC5] p-4 flex flex-col h-screen justify-between shadow-lg">
+<aside class="w-48 bg-[#B0BEC5] flex flex-col h-screen shadow-lg">
     <!-- Navigation Menu -->
-    <nav class="space-y-2 flex-grow">
+    <nav class="space-y-2 p-4 pb-2">
         <a href="{{ route('admDashboard') }}"
             class="block w-full px-4 py-3 text-white font-medium rounded-lg transition-colors {{ request()->routeIs('admDashboard') ? 'bg-blue-600' : 'bg-blue-500 hover:bg-blue-600' }}">
             Beranda
@@ -15,8 +15,11 @@
         </a>
     </nav>
 
-    <!-- Logout Button - Fixed at bottom -->
-    <div class="mt-auto pt-4">
+    <!-- Spacer untuk mendorong logout ke bawah -->
+    <div class="flex-grow"></div>
+
+    <!-- Logout Button - Always visible at bottom -->
+    <div class="p-4 pt-2">
         <form method="POST" action="{{ route('logout') }}">
             @csrf
             <button type="submit"
