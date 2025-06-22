@@ -9,6 +9,9 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Http\JsonResponse;
+use App\Models\Venue;
 
 class EventController extends Controller
 {
@@ -51,17 +54,10 @@ class EventController extends Controller
         return view('event', compact('events'));
     }
 
-    public function fetchDetail($id)
-    {
-        $event = Event::findOrFail($id);
-        return response()->json($event);
-    }
-
-    public function showEvent()
-    {
-        $events = Event::all();
-        return view('eventStatus', compact('events'));
-    }
+    // public function showEvent() {
+    //     $events = Event::all();
+    //     return view('eventStatus', compact('events'));
+    // }
 
     public function create()
     {
