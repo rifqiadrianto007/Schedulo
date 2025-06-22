@@ -1,27 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.admin')
 
-<head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <title>
-        Schedulo
-    </title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    @vite(['resources/css/app.css', 'resources/js/event.js'])
-    {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&amp;display=swap" rel="stylesheet" /> --}}
-</head>
-
-<body class="bg-gray-300 font-sans">
-    <!-- Header -->
-    <x-admHeader />
-
-    <div class="flex mh-screen overflow-hidden">
-        <!-- Sidebar -->
-        <x-admSidebar />
-
-        <!-- Main Content -->
+@section('content')
         <main class="flex-1 p-6 overflow-y-auto h-full">
             <div class="bg-white rounded-lg p-6 shadow-sm">
                 <div class="text-center py-10">
@@ -76,6 +55,4 @@
             </div>
         </main>
     </div>
-</body>
-
-</html>
+@endsection

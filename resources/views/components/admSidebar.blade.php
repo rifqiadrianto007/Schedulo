@@ -1,77 +1,60 @@
-<!-- Sidebar Component -->
-<aside
-    style="width: 16rem; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); border-right: 1px solid rgba(255, 255, 255, 0.2); position: relative;">
-    <div
-        style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(248, 250, 252, 0.5), rgba(239, 246, 255, 0.5));">
-    </div>
-
-    <div style="position: relative; z-index: 10; display: flex; flex-direction: column; height: 100%;">
+<aside class="w-64 bg-white shadow-lg border-r border-gray-200">
+    <div class="flex flex-col h-full">
         <!-- Navigation Menu -->
-        <nav style="flex: 1; padding: 1.5rem 1rem; display: flex; flex-direction: column; gap: 0.75rem;">
-            <div style="margin-bottom: 1.5rem;">
-                <p
-                    style="font-size: 0.75rem; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.05em; padding: 0 0.75rem; margin: 0;">
-                    Menu Utama</p>
-            </div>
-
+        <nav class="flex-1 px-4 py-6 space-y-2">
+            <!-- Dashboard/Beranda -->
             <a href="{{ route('admDashboard') }}"
-                style="position: relative; overflow: hidden; display: flex; align-items: center; padding: 0.75rem 1rem; color: white; font-weight: 500; border-radius: 0.75rem; transition: all 0.3s ease; background: linear-gradient(90deg, #3b82f6, #8b5cf6); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); text-decoration: none; {{ request()->routeIs('admDashboard') ? '' : 'color: #374151;' }}">
+                class="flex items-center px-4 py-3 rounded-xl font-medium transition-all duration-200 {{ request()->routeIs('admDashboard') ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-md' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-600' }}">
                 <div
-                    style="width: 2.5rem; height: 2.5rem; background: rgba(255, 255, 255, 0.2); border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease;">
-                    <i class="fas fa-home" style="font-size: 1.125rem;"></i>
+                    class="w-10 h-10 rounded-lg flex items-center justify-center {{ request()->routeIs('admDashboard') ? 'bg-white/20' : 'bg-blue-100' }}">
+                    <i
+                        class="fas fa-home text-lg {{ request()->routeIs('admDashboard') ? 'text-white' : 'text-blue-600' }}"></i>
                 </div>
-                <span style="margin-left: 0.75rem; font-weight: 600;">Beranda</span>
-                <div style="margin-left: auto; width: 0.5rem; height: 0.5rem; background: white; border-radius: 50%;">
-                </div>
+                <span class="ml-3">Beranda</span>
+                @if (request()->routeIs('admDashboard'))
+                    <div class="ml-auto w-2 h-2 bg-white rounded-full"></div>
+                @endif
             </a>
 
+            <!-- Event -->
             <a href="{{ route('eventList') }}"
-                style="position: relative; overflow: hidden; display: flex; align-items: center; padding: 0.75rem 1rem; color: #374151; font-weight: 500; border-radius: 0.75rem; transition: all 0.3s ease; text-decoration: none; {{ request()->routeIs('admEvent') ? 'background: linear-gradient(90deg, #3b82f6, #8b5cf6); color: white; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);' : '' }}"
-                onmouseover="this.style.color='#2563eb'; this.style.background='#eff6ff';"
-                onmouseout="this.style.color='#374151'; this.style.background='transparent';">
-                <div style="width: 2.5rem; height: 2.5rem; background: #dbeafe; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;"
-                    onmouseover="this.style.background='#bfdbfe'; this.style.transform='scale(1.1)';"
-                    onmouseout="this.style.background='#dbeafe'; this.style.transform='scale(1)';">
-                    <i class="fas fa-calendar-alt" style="color: #2563eb; font-size: 1.125rem;"></i>
+                class="flex items-center px-4 py-3 rounded-xl font-medium transition-all duration-200 {{ request()->routeIs('eventList') || request()->routeIs('event*') ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-md' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-600' }}">
+                <div
+                    class="w-10 h-10 rounded-lg flex items-center justify-center {{ request()->routeIs('eventList') || request()->routeIs('event*') ? 'bg-white/20' : 'bg-blue-100' }}">
+                    <i
+                        class="fas fa-calendar-alt text-lg {{ request()->routeIs('eventList') || request()->routeIs('event*') ? 'text-white' : 'text-blue-600' }}"></i>
                 </div>
-                <span style="margin-left: 0.75rem;">Event</span>
-                <div style="margin-left: auto; opacity: 0; transition: opacity 0.3s ease;"
-                    onmouseover="this.style.opacity='1';" onmouseout="this.style.opacity='0';">
-                    <i class="fas fa-arrow-right" style="font-size: 0.875rem;"></i>
-                </div>
+                <span class="ml-3">Event</span>
+                @if (request()->routeIs('eventList') || request()->routeIs('event*'))
+                    <div class="ml-auto w-2 h-2 bg-white rounded-full"></div>
+                @endif
             </a>
 
+            <!-- Venue -->
             <a href="{{ route('admVenue') }}"
-                style="position: relative; overflow: hidden; display: flex; align-items: center; padding: 0.75rem 1rem; color: #374151; font-weight: 500; border-radius: 0.75rem; transition: all 0.3s ease; text-decoration: none; {{ request()->routeIs('admVenue') ? 'background: linear-gradient(90deg, #10b981, #059669); color: white; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);' : '' }}"
-                onmouseover="this.style.color='#059669'; this.style.background='#f0fdf4';"
-                onmouseout="this.style.color='#374151'; this.style.background='transparent';">
-                <div style="width: 2.5rem; height: 2.5rem; background: #dcfce7; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;"
-                    onmouseover="this.style.background='#bbf7d0'; this.style.transform='scale(1.1)';"
-                    onmouseout="this.style.background='#dcfce7'; this.style.transform='scale(1)';">
-                    <i class="fas fa-map-marked-alt" style="color: #059669; font-size: 1.125rem;"></i>
+                class="flex items-center px-4 py-3 rounded-xl font-medium transition-all duration-200 {{ request()->routeIs('admVenue') || request()->routeIs('venue*') ? 'bg-gradient-to-r from-green-500 to-emerald-600 text-white shadow-md' : 'text-gray-700 hover:bg-green-50 hover:text-green-600' }}">
+                <div
+                    class="w-10 h-10 rounded-lg flex items-center justify-center {{ request()->routeIs('admVenue') || request()->routeIs('venue*') ? 'bg-white/20' : 'bg-green-100' }}">
+                    <i
+                        class="fas fa-map-marked-alt text-lg {{ request()->routeIs('admVenue') || request()->routeIs('venue*') ? 'text-white' : 'text-green-600' }}"></i>
                 </div>
-                <span style="margin-left: 0.75rem;">Venue</span>
-                <div style="margin-left: auto; opacity: 0; transition: opacity 0.3s ease;"
-                    onmouseover="this.style.opacity='1';" onmouseout="this.style.opacity='0';">
-                    <i class="fas fa-arrow-right" style="font-size: 0.875rem;"></i>
-                </div>
+                <span class="ml-3">Venue</span>
+                @if (request()->routeIs('admVenue') || request()->routeIs('venue*'))
+                    <div class="ml-auto w-2 h-2 bg-white rounded-full"></div>
+                @endif
             </a>
         </nav>
 
-        <!-- Logout Button -->
-        <div style="padding: 1rem; border-top: 1px solid rgba(229, 231, 235, 0.5);">
+        <!-- Logout Section -->
+        <div class="p-4 border-t border-gray-200">
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit"
-                    style="width: 100%; display: flex; align-items: center; padding: 0.75rem 1rem; background: linear-gradient(90deg, #ef4444, #ec4899); color: white; font-weight: 600; border-radius: 0.75rem; transition: all 0.3s ease; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); border: none; cursor: pointer; transform: scale(1);"
-                    onmouseover="this.style.background='linear-gradient(90deg, #dc2626, #db2777)'; this.style.boxShadow='0 20px 25px -5px rgba(0, 0, 0, 0.1)'; this.style.transform='scale(1.05)';"
-                    onmouseout="this.style.background='linear-gradient(90deg, #ef4444, #ec4899)'; this.style.boxShadow='0 10px 15px -3px rgba(0, 0, 0, 0.1)'; this.style.transform='scale(1)';">
-                    <div style="width: 2.5rem; height: 2.5rem; background: rgba(255, 255, 255, 0.2); border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease;"
-                        onmouseover="this.style.transform='rotate(12deg)';"
-                        onmouseout="this.style.transform='rotate(0deg)';">
-                        <i class="fas fa-sign-out-alt" style="font-size: 1.125rem;"></i>
+                    class="w-full flex items-center px-4 py-3 bg-gradient-to-r from-red-500 to-pink-600 text-white font-medium rounded-xl transition-all duration-200 hover:from-red-600 hover:to-pink-700 shadow-md hover:shadow-lg">
+                    <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-sign-out-alt text-white text-lg"></i>
                     </div>
-                    <span style="margin-left: 0.75rem;">Logout</span>
+                    <span class="ml-3">Logout</span>
                 </button>
             </form>
         </div>
