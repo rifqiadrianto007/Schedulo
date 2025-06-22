@@ -99,10 +99,6 @@
                         class="bg-gray-400 hover:bg-gray-500 text-white px-8 py-2 rounded font-medium transition-colors">
                         Kembali
                     </button>
-                    <a href="{{ route('form.event') }}"
-                        class="bg-primary-blue hover:bg-blue-700 text-white px-8 py-2 rounded font-medium transition-colors">
-                        Booking Sekarang
-                    </a>
                 </div>
             </div>
         </div>
