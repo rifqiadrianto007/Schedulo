@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Event;
+use App\Models\Venue;
+use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Http\JsonResponse;
-use App\Models\Venue;
 
 class EventController extends Controller
 {
@@ -108,6 +108,7 @@ class EventController extends Controller
             'poster' => $path,
             'contact' => $request->contact,
             'status' => 'Belum Disetujui',
+            'user_id' => auth()->id(),
         ]);
 
         return redirect()->route('eventStatus')->with('success', 'Berhasil mengajukan event');
@@ -116,6 +117,7 @@ class EventController extends Controller
     public function edit($id)
     {
         $event = Event::findOrFail($id);
+        $event->user_id !== Auth::id() ? abort(403, 'Unauthorized action.') : null;
         return view('editEvent', compact('event'));
     }
 

@@ -57,7 +57,7 @@ Route::get('/event/{id}/edit', [EventController::class, 'edit'])->name('event.ed
 
 Route::post('/event/{id}/update', [EventController::class, 'update'])->name('event.update')->middleware('auth');
 
-Route::get('/eventStatus', [EventController::class, 'showEvent'])->name('eventStatus');
+Route::get('/eventStatus', [EventController::class, 'showEvent'])->name('eventStatus')->middleware('auth');
 
 Route::get('admDashboard', function () {
     return view('admDashboard');
