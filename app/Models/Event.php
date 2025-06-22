@@ -29,5 +29,11 @@ class Event extends Model
         'contact',
         'status',
         'catatan_admin',
+        'user_id',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -5,7 +5,6 @@
     <aside class="w-64 bg-white shadow-lg border-r border-gray-200">
             <div class="mt-8 flex flex-col items-center space-y-3">
                 <a href="{{ route('form.event') }}" class="w-40 px-4 py-2 bg-blue-600 text-white rounded text-center hover:bg-blue-700">Ajukan Event</a>
-                <a href="#"class="w-40 px-4 py-2 bg-gray-200 text-black rounded text-center hover:bg-gray-300">Riwayat Pengajuan</a>
             </div>
         </nav>
     </aside>
