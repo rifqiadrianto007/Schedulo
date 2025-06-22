@@ -39,9 +39,15 @@ Route::get('/admVenue', [VenueController::class, 'index'])->name('admVenue')->mi
 
 Route::delete('admVenue/delete/{id}', [VenueController::class, 'destroy'])->name('admVenue.delete')->middleware('auth', 'admin');
 
-// Route::get('/event', [EventController::class, 'index'])->name('event');
+Route::get('/event', [EventController::class, 'index'])->name('event');
 
-// Route::get('event', [EventController::class, 'showAdmEvent'])->name('event');
+Route::get('/event/{id}', [EventController::class, 'showPublicDetail'])->name('event.detail');
+
+Route::get('event', [EventController::class, 'showAdmEvent'])->name('event');
+
+Route::get('/event/fetch/{id}', [EventController::class, 'fetchDetail'])->name('event.fetch');
+
+Route::get('/event/fetch/{id}', [EventController::class, 'fetchDetailAjax']);
 
 Route::get('event/tambah', [EventController::class, 'create'])->name('event.create')->middleware('auth');
 
