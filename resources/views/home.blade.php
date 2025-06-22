@@ -55,29 +55,17 @@
 
             <!-- Events Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                @for ($i = 1; $i <= 12; $i++)
+                @foreach ($events as $event)
                     <div class="bg-white rounded-lg shadow-md overflow-hidden border">
-                        <img src="{{ asset('img/kegiatan' . (($i % 2) + 1) . '.png') }}" alt="Event"
-                            class="w-full h-40 object-cover">
+                        <img src="{{ asset('storage/' . $event->poster) }}" alt="Event" class="w-full h-40 object-cover">
                         <div class="p-4">
-                            <h3 class="font-semibold text-gray-800 mb-2">Pembinaan Mahasiswa Wirausaha (P2MW)</h3>
+                            <h3 class="font-semibold text-gray-800 mb-2">{{ $event->nama_kegiatan }}</h3>
                             <div class="text-sm text-blue-600 bg-blue-100 px-2 py-1 rounded-full inline-block mb-3">
-                                24 Jan - 24 Jan
+                                {{ \Carbon\Carbon::parse($event->tanggal_pelaksanaan)->format('d M Y') }}
                             </div>
-                            <button
-                                class="w-full bg-gray-400 text-white py-2 px-4 rounded-lg font-medium hover:bg-gray-500">
-                                Detail
-                            </button>
                         </div>
                     </div>
-                @endfor
-            </div>
-
-            <!-- More Button -->
-            <div class="text-center">
-                <button class="bg-yellow-400 text-black px-8 py-3 rounded-lg font-bold text-lg hover:bg-yellow-500 w-full">
-                    More
-                </button>
+                @endforeach
             </div>
         </div>
     </section>

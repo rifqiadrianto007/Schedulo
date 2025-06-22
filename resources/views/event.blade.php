@@ -36,27 +36,25 @@
         <!-- Events Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             <!-- Event Card Template (akan direpeat untuk setiap event) -->
-            @for ($i = 1; $i <= 12; $i++)
+            @foreach ($events as $event)
                 <div class="bg-white rounded-lg shadow-md overflow-hidden event-card">
                     <div class="relative">
-                        <img src="{{ asset('img/kegiatan1.jpg') }}" alt=""
-                            class="w-full h-auto rounded-lg shadow-lg">
+                        <img src="{{ asset('storage/' . $event->poster) }}" alt="{{ $event->nama_kegiatan }}"
+                            class="w-full h-48 object-cover rounded-t-lg">
                     </div>
                     <div class="p-4">
-                        <h3 class="text-lg font-semibold text-gray-800 mb-2">
-                            Pembinaan Mahasiswa Wirausaha(P2MW)
-                        </h3>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">{{ $event->nama_kegiatan }}</h3>
                         <p class="text-blue-600 text-sm mb-4">
                             <i class="far fa-calendar-alt mr-1"></i>
-                            24 Jan - 24 Jan
+                            {{ \Carbon\Carbon::parse($event->tanggal_pelaksanaan)->format('d M Y') }}
                         </p>
-                        <button onclick="showEventDetail()"
+                        <button onclick="showEventDetail({{ $event->id }})"
                             class="w-full bg-gray-400 hover:bg-gray-500 text-white py-2 px-4 rounded font-medium transition-colors">
                             Detail
                         </button>
                     </div>
                 </div>
-            @endfor
+            @endforeach
         </div>
 
         <!-- Pagination -->

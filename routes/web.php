@@ -7,9 +7,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\AdminController;
 use App\Http\Middleware\auth;
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/', [EventController::class, 'homepage'])->name('home');
 
 Route::get('login', function () {
     return view('login');
@@ -43,7 +41,13 @@ Route::delete('admVenue/delete/{id}', [VenueController::class, 'destroy'])->name
 
 Route::get('/event', [EventController::class, 'index'])->name('event');
 
+Route::get('/event/{id}', [EventController::class, 'showPublicDetail'])->name('event.detail');
+
 Route::get('event', [EventController::class, 'showAdmEvent'])->name('event');
+
+Route::get('/event/fetch/{id}', [EventController::class, 'fetchDetail'])->name('event.fetch');
+
+Route::get('/event/fetch/{id}', [EventController::class, 'fetchDetailAjax']);
 
 Route::get('event/tambah', [EventController::class, 'create'])->name('event.create')->middleware('auth');
 
@@ -79,3 +83,6 @@ Route::post('/admFormDataEvent/{id}/updateStatus', [EventController::class, 'upd
 
 Route::get('/eventDetailAdm/{id}', [EventController::class, 'showDetail'])->name('event.detailAdm')->middleware('auth', 'admin');
 
+Route::get('/api/event/{id}', function ($id) {
+    return App\Models\Event::findOrFail($id);
+});
