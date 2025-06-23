@@ -100,4 +100,10 @@ public function showUserVenue()
 
         return response()->json(['message' => 'Venue berhasil dihapus.'], 200);
     }
+
+    public function showLokasi()
+    {
+        $venues = Venue::all();
+        return view('event', compact('venues'));
+}
 }

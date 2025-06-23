@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Event;
-use App\Models\Venue;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Venue;
 
-class EventController extends Controller
-{
+class EventController extends Controller {
     public function showPendingEvents()
     {
         $events = Event::whereIn('status', ['Belum Disetujui', 'Revisi'])->get();
@@ -27,6 +27,7 @@ class EventController extends Controller
     public function updateStatus(Request $request, $id)
     {
         $event = Event::findOrFail($id);
+
         $event->status = $request->input('status');
 
         if ($request->input('status') === 'Revisi') {
@@ -34,34 +35,33 @@ class EventController extends Controller
         }
 
         $event->save();
+
         return redirect()->route('admEvent')->with('success', 'Status event berhasil diperbarui.');
     }
 
-    public function homepage()
-    {
-        $carouselEvents = Event::where('status', 'Disetujui')
-                                ->orderBy('tanggal_pelaksanaan', 'asc')
-                                ->take(5)
-                                ->get();
+    public function showAdmEvent() {
+        $events = Event::all()->map(function($event) {
+            $event->tanggal_formatted = date('d-m-Y', strtotime($event->tanggal_pelaksanaan));
+            $event->biaya_label = $event->biaya_pendaftaran ? 'Rp ' . number_format($event->biaya_pendaftaran, 0, ',', '.') : 'Gratis';
+            $event->tenggat_formatted = date('d-m-Y', strtotime($event->tenggat_pendaftaran));
+            $event->image = asset('storage/' . $event->poster);
+            $event->contact_link = 'https://wa.me/' . preg_replace('/[^0-9]/', '', $event->contact);
+            return $event;
+        });
 
-        $events = Event::where('status', 'Disetujui')
-                        ->latest()
-                        ->take(6)
-                        ->get();
-
-        return view('home', compact('carouselEvents', 'events'));
-    }
-
-    public function showAdmEvent()
-    {
-        $events = Event::where('status', 'Disetujui')->orderBy('tanggal_pelaksanaan', 'desc')->get();
         return view('event', compact('events'));
     }
 
-    public function eventList()
+    public function fetchDetail($id)
     {
-        $events = Event::where('status', 'Disetujui')->get();
-        return view('admEvent', compact('events'));
+        $event = Event::findOrFail($id);
+        return response()->json($event);
+    }
+
+    public function showEvent()
+    {
+        $events = Event::all();
+        return view('eventStatus', compact('events'));
     }
 
     public function showEvent()
@@ -70,26 +70,12 @@ class EventController extends Controller
         return view('eventStatus', compact('events'));
     }
 
-    public function showDetail($id)
-    {
-        $event = Event::findOrFail($id);
-        return view('eventDetailAdm', compact('event'));
-    }
-
-    public function showPublicDetail($id)
-    {
-        $event = Event::where('status', 'Disetujui')->findOrFail($id);
-        return view('eventDetail', compact('event'));
-    }
-
-    public function create()
-    {
+    public function create() {
         $venues = Venue::all();
         return view('formEvent', compact('venues'));
     }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         $validated = $request->validate([
             'nama_pelaksana' => 'required|string|max:255',
             'nim_nip' => 'required|string|max:50',
@@ -127,23 +113,17 @@ class EventController extends Controller
             'poster' => $path,
             'contact' => $request->contact,
             'status' => 'Belum Disetujui',
-            'user_id' => auth()->id(),
         ]);
 
         return redirect()->route('eventStatus')->with('success', 'Berhasil mengajukan event');
     }
 
-    public function edit($id)
-    {
+    public function edit($id) {
         $event = Event::findOrFail($id);
-        if ($event->user_id != Auth::id()) {
-            abort(403, 'Unauthorized action.');
-        }
         return view('editEvent', compact('event'));
     }
 
-    public function update(Request $request, $id)
-    {
+    public function update (Request $request, $id) {
         $event = Event::findOrFail($id);
 
         $event->nama_pelaksana = $request->nama_pelaksana;
@@ -173,26 +153,16 @@ class EventController extends Controller
         return redirect()->route('eventStatus')->with('success', 'Data berhasil diperbarui.');
     }
 
-    public function fetchDetailAjax($id): JsonResponse
+    public function eventList()
     {
-        $event = Event::with('venue')->findOrFail($id);
+        $events = Event::where('status', 'Disetujui')->get();
 
-        return response()->json([
-            'id' => $event->id,
-            'nama_kegiatan' => $event->nama_kegiatan,
-            'tanggal_pelaksanaan' => \Carbon\Carbon::parse($event->tanggal_pelaksanaan)->translatedFormat('d F Y'),
-            'tenggat_pendaftaran' => \Carbon\Carbon::parse($event->tenggat_pendaftaran)->translatedFormat('d F Y'),
-            'kuota' => $event->kuota,
-            'poster' => $event->poster,
-            'deskripsi' => $event->deskripsi,
-            'link_form' => $event->link_form,
-            'gambar_venue' => $event->venue->gambar_venue ?? null,
-            'tempat_kegiatan' => $event->tempat_kegiatan,
-            'narasumber_pemateri' => $event->narasumber_pemateri,
-            'biaya_pendaftaran' => $event->biaya_pendaftaran,
-            'contact' => $event->contact,
-            'link_zoom' => $event->link_zoom,
-            'nim_nip' => Auth::check() ? Auth::user()->nim ?? Auth::user()->nip : null
-        ]);
+        return view('admEvent', compact('events'));
+    }
+
+    public function showDetail($id)
+    {
+        $event = Event::findOrFail($id);
+        return view('eventDetailAdm', compact('event'));
     }
 }
