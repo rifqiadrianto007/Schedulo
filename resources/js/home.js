@@ -1,14 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
     let currentSlide = 0;
-    const totalSlides = 4;
 
-    const slides = [
-        "/img/kegiatan1.jpg",
-        "/img/logo-unej.png",
-        "/img/kegiatan2.png",
-        "/img/AwardNight.png"
-    ];
+    if (!window.carouselEvents || carouselEvents.length === 0) return;
 
+    const totalSlides = carouselEvents.length;
     const dots = document.querySelectorAll('.dot');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
@@ -21,9 +16,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function updateCarousel() {
-        currentSlideImg.src = slides[currentSlide];
-        prevSlideImg.src = slides[getSlideIndex(-1)];
-        nextSlideImg.src = slides[getSlideIndex(1)];
+        currentSlideImg.src = `/storage/${carouselEvents[currentSlide].poster}`;
+        prevSlideImg.src = `/storage/${carouselEvents[getSlideIndex(-1)].poster}`;
+        nextSlideImg.src = `/storage/${carouselEvents[getSlideIndex(1)].poster}`;
 
         dots.forEach((dot, index) => {
             dot.classList.toggle('bg-gray-400', index === currentSlide);

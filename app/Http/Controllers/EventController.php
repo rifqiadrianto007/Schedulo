@@ -9,9 +9,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Http\JsonResponse;
-use App\Models\Venue;
 
 class EventController extends Controller
 {
@@ -30,7 +27,6 @@ class EventController extends Controller
     public function updateStatus(Request $request, $id)
     {
         $event = Event::findOrFail($id);
-
         $event->status = $request->input('status');
 
         if ($request->input('status') === 'Revisi') {
@@ -38,14 +34,22 @@ class EventController extends Controller
         }
 
         $event->save();
-
         return redirect()->route('admEvent')->with('success', 'Status event berhasil diperbarui.');
     }
 
     public function homepage()
     {
-        $events = Event::where('status', 'Disetujui')->latest()->take(6)->get();
-        return view('home', compact('events'));
+        $carouselEvents = Event::where('status', 'Disetujui')
+                                ->orderBy('tanggal_pelaksanaan', 'asc')
+                                ->take(5)
+                                ->get();
+
+        $events = Event::where('status', 'Disetujui')
+                        ->latest()
+                        ->take(6)
+                        ->get();
+
+        return view('home', compact('carouselEvents', 'events'));
     }
 
     public function showAdmEvent()
@@ -54,10 +58,29 @@ class EventController extends Controller
         return view('event', compact('events'));
     }
 
-    // public function showEvent() {
-    //     $events = Event::all();
-    //     return view('eventStatus', compact('events'));
-    // }
+    public function eventList()
+    {
+        $events = Event::where('status', 'Disetujui')->get();
+        return view('admEvent', compact('events'));
+    }
+
+    public function showEvent()
+    {
+        $events = Event::where('user_id', auth()->id())->get();
+        return view('eventStatus', compact('events'));
+    }
+
+    public function showDetail($id)
+    {
+        $event = Event::findOrFail($id);
+        return view('eventDetailAdm', compact('event'));
+    }
+
+    public function showPublicDetail($id)
+    {
+        $event = Event::where('status', 'Disetujui')->findOrFail($id);
+        return view('eventDetail', compact('event'));
+    }
 
     public function create()
     {
@@ -113,7 +136,9 @@ class EventController extends Controller
     public function edit($id)
     {
         $event = Event::findOrFail($id);
-        $event->user_id !== Auth::id() ? abort(403, 'Unauthorized action.') : null;
+        if ($event->user_id != Auth::id()) {
+            abort(403, 'Unauthorized action.');
+        }
         return view('editEvent', compact('event'));
     }
 
@@ -148,28 +173,9 @@ class EventController extends Controller
         return redirect()->route('eventStatus')->with('success', 'Data berhasil diperbarui.');
     }
 
-    public function eventList()
-    {
-        $events = Event::where('status', 'Disetujui')->get();
-
-        return view('admEvent', compact('events'));
-    }
-
-    public function showDetail($id)
-    {
-        $event = Event::findOrFail($id);
-        return view('eventDetailAdm', compact('event'));
-    }
-
-    public function showPublicDetail($id)
-    {
-        $event = Event::where('status', 'Disetujui')->findOrFail($id);
-        return view('eventDetail', compact('event'));
-    }
-
     public function fetchDetailAjax($id): JsonResponse
     {
-        $event = Event::findOrFail($id);
+        $event = Event::with('venue')->findOrFail($id);
 
         return response()->json([
             'id' => $event->id,
@@ -179,11 +185,13 @@ class EventController extends Controller
             'kuota' => $event->kuota,
             'poster' => $event->poster,
             'deskripsi' => $event->deskripsi,
+            'link_form' => $event->link_form,
+            'gambar_venue' => $event->venue->gambar_venue ?? null,
             'tempat_kegiatan' => $event->tempat_kegiatan,
             'narasumber_pemateri' => $event->narasumber_pemateri,
-            'link_zoom' => $event->link_zoom,
             'biaya_pendaftaran' => $event->biaya_pendaftaran,
-            'contact' => $event->contact_person,
+            'contact' => $event->contact,
+            'link_zoom' => $event->link_zoom,
             'nim_nip' => Auth::check() ? Auth::user()->nim ?? Auth::user()->nip : null
         ]);
     }

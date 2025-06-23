@@ -8,21 +8,20 @@
                 <!-- Carousel Container with 3-slide preview -->
                 <div class="flex items-center justify-center space-x-4">
                     <!-- Previous slide (with opacity) -->
-
                     <div class="flex-shrink-0 w-1/4 opacity-40 transform scale-90">
-                        <img id="prevSlideImg" src="{{ asset('img/kegiatan1.jpg') }}" alt="Previous Slide"
+                        <img id="prevSlideImg" src="" alt="Previous Slide"
                             class="w-full h-auto rounded-lg shadow-lg">
                     </div>
 
                     <!-- Current slide (main) -->
                     <div class="flex-shrink-0 w-1/2">
-                        <img id="currentSlideImg" src="{{ asset('img/kegiatan2.png') }}" alt="Current Slide"
+                        <img id="currentSlideImg" src="" alt="Current Slide"
                             class="w-full h-auto rounded-lg shadow-lg">
                     </div>
 
                     <!-- Next slide (with opacity) -->
                     <div class="flex-shrink-0 w-1/4 opacity-40 transform scale-90">
-                        <img id="nextSlideImg" src="{{ asset('img/kegiatan1.jpg') }}" alt="Next Slide"
+                        <img id="nextSlideImg" src="" alt="Next Slide"
                             class="w-full h-auto rounded-lg shadow-lg">
                     </div>
                 </div>
@@ -39,10 +38,9 @@
 
                 <!-- Dots Indicator -->
                 <div class="flex justify-center mt-6 space-x-2">
-                    <button class="dot w-3 h-3 rounded-full bg-gray-400 active" data-slide="0"></button>
-                    <button class="dot w-3 h-3 rounded-full bg-gray-300" data-slide="1"></button>
-                    <button class="dot w-3 h-3 rounded-full bg-gray-300" data-slide="2"></button>
-                    <button class="dot w-3 h-3 rounded-full bg-gray-300" data-slide="3"></button>
+                    @foreach ($carouselEvents as $index => $event)
+                        <button class="dot w-3 h-3 rounded-full bg-gray-300" data-slide="{{ $index }}"></button>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -72,5 +70,71 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('js/home.js') }}"></script>
+    <script>
+        const carouselEvents = @json($carouselEvents);
+        console.log("carouselEvents:", carouselEvents); // debug
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let currentSlide = 0;
+            const totalSlides = carouselEvents.length;
+
+            if (totalSlides === 0) return;
+
+            const dots = document.querySelectorAll('.dot');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const currentSlideImg = document.getElementById('currentSlideImg');
+            const prevSlideImg = document.getElementById('prevSlideImg');
+            const nextSlideImg = document.getElementById('nextSlideImg');
+
+            function getSlideIndex(offset) {
+                return (currentSlide + offset + totalSlides) % totalSlides;
+            }
+
+            function updateCarousel() {
+                const current = carouselEvents[currentSlide];
+                const prev = carouselEvents[getSlideIndex(-1)];
+                const next = carouselEvents[getSlideIndex(1)];
+
+                currentSlideImg.src = `/storage/${current.poster}`;
+                prevSlideImg.src = `/storage/${prev.poster}`;
+                nextSlideImg.src = `/storage/${next.poster}`;
+
+                // Debug lognya, soalnya kalau pakai hari sekarang di log ga muncul muncul
+                console.log("Current src:", currentSlideImg.src);
+
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('bg-gray-400', index === currentSlide);
+                    dot.classList.toggle('bg-gray-300', index !== currentSlide);
+                    dot.classList.toggle('active', index === currentSlide);
+                });
+            }
+
+            function nextSlideFunc() {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                updateCarousel();
+            }
+
+            function prevSlideFunc() {
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                updateCarousel();
+            }
+
+            if (prevBtn && nextBtn && currentSlideImg) {
+                nextBtn.addEventListener('click', nextSlideFunc);
+                prevBtn.addEventListener('click', prevSlideFunc);
+
+                dots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => {
+                        currentSlide = index;
+                        updateCarousel();
+                    });
+                });
+
+                updateCarousel();
+                setInterval(nextSlideFunc, 5000);
+            }
+        });
+    </script>
 @endpush

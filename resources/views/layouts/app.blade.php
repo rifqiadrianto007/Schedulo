@@ -28,7 +28,7 @@
     <script src="//unpkg.com/alpinejs" defer></script>
 
     @stack('styles')
-    @vite(['public/css/app.css', 'public/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 </head>
 
@@ -42,6 +42,10 @@
     <x-footer />
 
     @stack('scripts')
+    <script>
+        console.log("DOM fully loaded, but maybe content belum available");
+    </script>
+</body>
 </body>
 
 </html>

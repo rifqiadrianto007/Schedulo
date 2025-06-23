@@ -6,7 +6,7 @@
 
     @foreach ($events as $event)
         @if (in_array($event->status, ['Belum Disetujui', 'Revisi']))
-        <div class="flex items-center justify-between bg-gray-300 rounded-lg px-4 py-3 mb-4 shadow">
+        <div class="flex items-center justify-between bg-gray-100 rounded-lg px-4 py-3 mb-4 shadow">
             <div class="text-lg font-semibold text-gray-800">
                 {{ $event->nama_kegiatan }}
             </div>
@@ -18,7 +18,7 @@
                         Belum Disetujui
                     </span>
                 @elseif ($event->status === 'Revisi')
-                    <span class="bg-red-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+                    <span class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg font-medium transition-colors">
                         Revisi
                     </span>
                 @endif
