@@ -72,7 +72,7 @@
 @push('scripts')
     <script>
         const carouselEvents = @json($carouselEvents);
-        console.log("carouselEvents:", carouselEvents); // debug
+        console.log("carouselEvents:", carouselEvents);
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {

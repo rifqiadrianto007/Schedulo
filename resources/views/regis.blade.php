@@ -110,7 +110,6 @@
     <x-footer />
 
     <script>
-        // Schedulo Authentication JavaScript - Optimized for both login and register
         document.addEventListener('DOMContentLoaded', function() {
             initializePasswordToggle();
             initializeFormValidation();
