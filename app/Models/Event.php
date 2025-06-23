@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
+use App\Models\Venue;
 
 class Event extends Model
 {
@@ -35,5 +37,10 @@ class Event extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function venue()
+    {
+        return $this->belongsTo(Venue::class, 'tempat_kegiatan', 'nama_tempat');
     }
 }

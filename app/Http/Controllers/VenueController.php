@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Venue;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Event;
 
 class VenueController extends Controller
 {
@@ -101,9 +102,10 @@ public function showUserVenue()
         return response()->json(['message' => 'Venue berhasil dihapus.'], 200);
     }
 
-    public function showLokasi()
-    {
-        $venues = Venue::all();
-        return view('event', compact('venues'));
-}
+    // public function showLokasi()
+    // {
+    //     $venues = Venue::all();
+    //     $events = Event::where('status', 'Disetujui')->orderBy('tanggal_pelaksanaan', 'desc')->get();
+    //     return view('event', compact('venues', 'events'));
+    // }
 }
