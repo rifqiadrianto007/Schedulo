@@ -1,51 +1,54 @@
 @extends('layouts.app')
 
 @section('content')
-    <div x-data="venueApp({{ $venues->toJson() }})" class="py-4">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4">
-                <label class="text-gray-700 font-medium">Cari Lokasi :</label>
-                <div class="flex-1 max-w-2xl w-full">
-                    <input type="text" x-model="searchQuery"
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        placeholder="Masukkan lokasi...">
-                </div>
-                <div class="flex space-x-2">
-                    <button @click="searchVenues()"
-                        class="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-2 rounded-lg font-medium transition-colors">
-                        Search
-                    </button>
+    <div x-data="venueApp({{ $venues->toJson() }})" class="flex flex-col min-h-screen">
+        <!-- Main Content Wrapper -->
+        <div class="flex-1 py-4">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4">
+                    <label class="text-gray-700 font-medium">Cari Lokasi :</label>
+                    <div class="flex-1 max-w-2xl w-full">
+                        <input type="text" x-model="searchQuery"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            placeholder="Masukkan lokasi...">
+                    </div>
+                    <div class="flex space-x-2">
+                        <button @click="searchVenues()"
+                            class="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-2 rounded-lg font-medium transition-colors">
+                            Search
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Venue Grid -->
-        <main class="container mx-auto px-4 py-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <template x-for="venue in paginatedVenues" :key="venue.id">
-                    <div
-                        class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                        <div class="relative">
-                            <img :src="venue.image" :alt="venue.nama_tempat" class="w-full h-48 object-cover"
-                                :onerror="'this.src=\'' + fallbackImage + '\''">
-                            <div
-                                class="absolute top-2 left-2 bg-yellow-400 text-gray-800 px-2 py-1 rounded text-xs font-medium">
-                                <i class="fas fa-map-marker-alt mr-1"></i>
-                                <span>Kampus</span>
+            <!-- Venue Grid -->
+            <main class="container mx-auto px-4 py-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <template x-for="venue in paginatedVenues" :key="venue.id">
+                        <div
+                            class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                            <div class="relative">
+                                <img :src="venue.image" :alt="venue.nama_tempat" class="w-full h-48 object-cover"
+                                    :onerror="'this.src=\'' + fallbackImage + '\''">
+                                <div
+                                    class="absolute top-2 left-2 bg-yellow-400 text-gray-800 px-2 py-1 rounded text-xs font-medium">
+                                    <i class="fas fa-map-marker-alt mr-1"></i>
+                                    <span>Kampus</span>
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-semibold text-gray-800 mb-2" x-text="venue.nama_tempat"></h3>
+                                <p class="text-gray-600 text-sm mb-4" x-text="venue.alamat"></p>
+                                <button @click="openModal(venue)"
+                                    class="w-full bg-primary-blue hover:bg-blue-700 text-white py-2 rounded font-medium transition-colors duration-300">
+                                    Detail
+                                </button>
                             </div>
                         </div>
-                        <div class="p-4">
-                            <h3 class="font-semibold text-gray-800 mb-2" x-text="venue.nama_tempat"></h3>
-                            <p class="text-gray-600 text-sm mb-4" x-text="venue.alamat"></p>
-                            <button @click="openModal(venue)"
-                                class="w-full bg-primary-blue hover:bg-blue-700 text-white py-2 rounded font-medium transition-colors duration-300">
-                                Detail
-                            </button>
-                        </div>
-                    </div>
-                </template>
-            </div>
-        </main>
+                    </template>
+                </div>
+            </main>
+        </div>
 
         <!-- Modal -->
         <div x-show="showModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
@@ -166,7 +169,3 @@
         }
     }
 </script>
-
-{{-- @push('scripts')
-    <script src="{{ asset('resources\js\venue.js') }}"></script>
-@endpush --}}

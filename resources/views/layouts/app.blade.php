@@ -32,7 +32,7 @@
 
 </head>
 
-<body class="bg-gray-50 font-poppins">
+<body class="bg-gray-50 font-poppins flex flex-col min-h-screen">
     <x-header />
 
     <main>

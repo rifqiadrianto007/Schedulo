@@ -1,4 +1,4 @@
-<footer class="bg-[#1565c0] text-white px-6 py-4">
+<footer class="bg-[#1565c0] text-white px-6 py-4 mt-auto">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <!-- Logo -->
         <div class="flex-shrink-0">

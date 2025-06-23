@@ -40,11 +40,6 @@
                                     <h3 class="text-lg font-semibold text-gray-800">{{ $event->nama_kegiatan }}</h3>
                                 </div>
                                 <div class="flex items-center space-x-3">
-                                    <span class="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium text-sm">
-                                        {{ \Carbon\Carbon::parse($event->tanggal_mulai)->format('d M') }} -
-                                        {{ \Carbon\Carbon::parse($event->tanggal_selesai)->format('d M') }}
-                                    </span>
-
                                     <a href="{{ route('event.detailAdm', $event->id) }}"
                                         class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm transition">
                                         Detail
